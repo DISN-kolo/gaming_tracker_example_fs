@@ -1,0 +1,64 @@
+services:
+  back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: ggs_back
+    depends_on:
+      - db
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./back:/app
+    env_file:
+      - ./back/.env
+    networks:
+      - back_net
+      - db_net
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: ggs_front
+    depends_on:
+      - back
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front:/app
+    env_file:
+      - ./front/.env
+    networks:
+      - back_net
+
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: ggs_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_vol:/var/lib/pgsql
+      - ./db:/app
+    env_file:
+      - ./front/.env
+    networks:
+      - db_net
+
+volumes:
+  db_vol:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./data/postgresql
+      o: bind
+
+networks:
+  back_net:
+    name: back_net
+    driver: bridge
+  db_net:
+    name: db_net
+    driver: bridge
