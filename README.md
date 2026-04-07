@@ -8,6 +8,6 @@ A fullstack project to learn Angular and .NET Core
 - the rest of the commands share their start but have different `dotnet...` tails:
 	- `dotnet new classlib -n Ggs.Domain`
 	- `dotnet new sln -n Ggs`
-	- `dotnet snl add Ggs.Api/Ggs.Api.csproj`
-	- `dotnet snl add Ggs.Domain/Ggs.Domain.csproj`
+	- `dotnet sln add Ggs.Api/Ggs.Api.csproj`
+	- `dotnet sln add Ggs.Domain/Ggs.Domain.csproj`
 	- `dotnet add Ggs.Api/Ggs.Api.csproj reference Ggs.Domain/Ggs.Domain.csproj`
