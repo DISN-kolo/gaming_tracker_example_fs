@@ -11,7 +11,7 @@ services:
     volumes:
       - ./back:/app
     env_file:
-      - ./back/.env
+      - .env
     networks:
       - back_net
       - db_net
@@ -28,24 +28,26 @@ services:
     volumes:
       - ./front:/app
     env_file:
-      - ./front/.env
+      - .env
     networks:
       - back_net
 
   db:
-    build:
-      context: ./db
-      dockerfile: Dockerfile
+    image: postgres:18
     container_name: ggs_db
     ports:
       - "5432:5432"
     volumes:
       - db_vol:/var/lib/pgsql
-      - ./db:/app
     env_file:
-      - ./front/.env
+      - .env
     networks:
       - db_net
+    healthcheck:
+      test: ["CMD", "pg_isready -U myuser -d ggsdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   db_vol:
