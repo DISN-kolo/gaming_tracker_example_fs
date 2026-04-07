@@ -11,3 +11,7 @@ A fullstack project to learn Angular and .NET Core
 	- `dotnet sln add Ggs.Api/Ggs.Api.csproj`
 	- `dotnet sln add Ggs.Domain/Ggs.Domain.csproj`
 	- `dotnet add Ggs.Api/Ggs.Api.csproj reference Ggs.Domain/Ggs.Domain.csproj`
+- adding the specific packages for specific projects is done similarly, but `$(pwd)` (the `...../back` folder) should be `$(pwd)/Specific.Project`:
+	- for the `Ggs.Api`:
+		- `dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 10.0.0`
+		- `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.0`
