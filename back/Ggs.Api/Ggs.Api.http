@@ -1,0 +1,6 @@
+@Ggs.Api_HostAddress = http://localhost:5182
+
+GET {{Ggs.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

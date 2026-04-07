@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Ggs.Api/Ggs.Api.csproj" />
+  <Project Path="Ggs.Domain/Ggs.Domain.csproj" />
+</Solution>
