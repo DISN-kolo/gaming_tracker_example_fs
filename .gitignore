@@ -90,3 +90,9 @@ yarn-error.log*
 # My specifics
 data/
 data/*
+
+# Vim
+*.swp
+*.swo
+.swp
+.swo
