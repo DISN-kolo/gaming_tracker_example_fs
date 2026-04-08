@@ -1,4 +1,4 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0
 WORKDIR /app
 EXPOSE 8443
-ENTRYPOINT ["dotnet", "watch", "--project", "Ggs.Api/Ggs.Api.csproj", "run"]
+ENTRYPOINT ["dotnet", "watch", "--non-interactive", "--project", "Ggs.Api/Ggs.Api.csproj", "run", "--no-launch-profile"]

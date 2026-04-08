@@ -4,6 +4,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./back:/app
+      - ./certs:/certs
 
   front:
     volumes:

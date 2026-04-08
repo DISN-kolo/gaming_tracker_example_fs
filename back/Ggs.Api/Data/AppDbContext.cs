@@ -1,4 +1,5 @@
 using Ggs.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ggs.Api.Data;
 
