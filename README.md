@@ -15,3 +15,8 @@ A fullstack project to learn Angular and .NET Core
 	- for the `Ggs.Api`:
 		- `dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 10.0.0`
 		- `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.0`
+
+## start the back-only version up:
+
+- launch the docker: `docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build back db`
+- connect for testing: `openssl s_client -connect localhost:8443`
