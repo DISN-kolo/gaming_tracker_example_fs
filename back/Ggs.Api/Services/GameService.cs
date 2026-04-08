@@ -1,3 +1,8 @@
+using Ggs.Api.Data;
+using Ggs.Api.DTOs;
+using Ggs.Domain.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace Ggs.Api.Services;
 
 public class GameService
@@ -9,9 +14,10 @@ public class GameService
 		_context = context;
 	}
 
-	public async Task<IEnumerable<GameDto>> GetAllAsync()
+	public async Task<IEnumerable<GameDto>> GetAllAsync(Guid userId)
 	{
 		return await _context.Games
+			.Where(g => g.UserId == userId)
 			.Select(g => new GameDto
 			{
 				Id = g.Id,
@@ -20,12 +26,18 @@ public class GameService
 			.ToListAsync();
 	}
 
-	public async Task<GameDto> GetByIdAsync(Guid id)
+	public async Task<GameDto?> GetByIdAsync(Guid id)
 	{
-		return _context.Games
-			.Where(g =>
-				g.Id == id
-			);
+		var game = await _context.Games.FindAsync(id);
+		if (game is null)
+		{
+			return null;
+		}
+		return new GameDto
+		{
+			Id = game.Id,
+			Title = game.Title,
+		};
 	}
 
 	public async Task<GameDto> CreateAsync(Guid userId, CreateGameRequest request)
@@ -38,11 +50,23 @@ public class GameService
 		};
 		_context.Games.Add(game);
 		await _context.SaveChangesAsync();
-	
+
 		return new GameDto
 		{
 			Id = game.Id,
 			Title = game.Title,
 		};
+	}
+
+	public async Task<bool> DeleteAsync(Guid id)
+	{
+		var game = await _context.Games.FindAsync(id);
+		if (game is null)
+		{
+			return false;
+		}
+		_context.Games.Remove(game);
+		await _context.SaveChangesAsync();
+		return true;
 	}
 }

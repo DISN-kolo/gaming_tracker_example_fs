@@ -1,10 +1,14 @@
-using Ggs.Api.Services;
+using System.Security.Claims;
 using Ggs.Api.DTOs;
+using Ggs.Api.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Ggs.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class GamesController : ControllerBase
 {
 	private readonly GameService _gameService;
@@ -17,7 +21,8 @@ public class GamesController : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<GameDto>>> GetAll()
 	{
-		var games = await _gameService.GetAllAsync();
+		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+		var games = await _gameService.GetAllAsync(userId);
 		return Ok(games);
 	}
 
@@ -33,23 +38,11 @@ public class GamesController : ControllerBase
 	}
 
 	[HttpPost]
-	[Authorize]
 	public async Task<ActionResult<GameDto>> Create(CreateGameRequest request)
 	{
-		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 		var game = await _gameService.CreateAsync(userId, request);
 		return CreatedAtAction(nameof(GetById), new { id = game.Id }, game);
-	}
-
-	[HttpPut("{id}")]
-	public async Task<ActionResult<GameDto>> Update(Guid id, UpdateGameRequest request)
-	{
-		var game = await _gameService.UpdateAsync(id, request);
-		if (game is null)
-		{
-			return NotFound();
-		}
-		return Ok(game);
 	}
 
 	[HttpDelete("{id}")]

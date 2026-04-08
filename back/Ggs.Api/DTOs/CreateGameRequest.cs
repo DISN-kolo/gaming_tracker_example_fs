@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Ggs.Api.DTOs;
 
 public class CreateGameRequest

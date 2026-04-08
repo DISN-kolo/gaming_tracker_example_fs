@@ -21,7 +21,7 @@ public class AppDbContext : DbContext
 
 			entity.Property(g => g.Title)
 			.IsRequired()
-			.HasMaxLength(512);
+			.HasMaxLength(200);
 
 			entity.HasOne(g => g.Owner)
 			.WithMany(u => u.Games)
