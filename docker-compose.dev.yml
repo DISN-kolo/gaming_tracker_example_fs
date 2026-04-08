@@ -1,0 +1,10 @@
+services:
+  back:
+    build:
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./back:/app
+
+  front:
+    volumes:
+      - ./front:/app

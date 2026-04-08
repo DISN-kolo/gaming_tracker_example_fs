@@ -2,15 +2,13 @@ services:
   back:
     build:
       context: ./back
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     container_name: ggs_back
     depends_on:
       db:
         condition: service_healthy
     ports:
       - "8443:8443"
-    volumes:
-      - ./back:/app
     env_file:
       - .env
     networks:
@@ -26,8 +24,6 @@ services:
       - back
     ports:
       - "3000:3000"
-    volumes:
-      - ./front:/app
     env_file:
       - .env
     networks:
