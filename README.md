@@ -15,6 +15,11 @@ A fullstack project to learn Angular and .NET Core
 	- for the `Ggs.Api`:
 		- `dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 10.0.0`
 		- `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.0`
+		- `dotnet add package Microsoft.EntityFrameworkCore.Design --version 10.0.0`
+- adding dotnet local tools (from `back/`):
+	- `docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:10.0 dotnet new tool-manifest`
+	- `docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:10.0 dotnet tool install dotnet-ef`
+	- keep in mind - it somehow created the config file plainly, while it needs to be in the `...../back/.config` folder. mv if the same thing happenned to you
 
 ## start the back-only version up:
 
