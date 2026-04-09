@@ -13,6 +13,9 @@ services:
       - .env
     environment:
       - ConnectionStrings__Default=Host=db;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - ASPNETCORE_URLS=https://+:8443
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/certs/cert.pem
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/certs/cert-key.pem
     networks:
       - back_net
       - db_net
@@ -53,7 +56,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ./data/postgresql
+      device: ${DB_DATA_DIR}
       o: bind
 
 networks:

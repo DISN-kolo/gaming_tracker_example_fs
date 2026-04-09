@@ -1,12 +1,21 @@
 CERTS_DIR = certs
 CERT_FILE = $(CERTS_DIR)/cert.pem
 
+GOINFRE_DIR = /goinfre/$(USER)
+ifneq ($(wildcard $(GOINFRE_DIR)),)
+DB_DATA_DIR = $(GOINFRE_DIR)/gaming_tracker_db
+else
+DB_DATA_DIR = $(CURDIR)/data/postgresql
+endif
+export DB_DATA_DIR
+
 COMPOSE = docker compose -f docker-compose.yml
 ifdef dev
 COMPOSE += -f docker-compose.dev.yml
 endif
 
 all:
+	mkdir -p $(DB_DATA_DIR)
 	$(COMPOSE) up --build
 
 down:

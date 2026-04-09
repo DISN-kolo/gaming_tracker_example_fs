@@ -2,6 +2,8 @@ services:
   back:
     build:
       dockerfile: Dockerfile.dev
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ./back:/app
       - ./certs:/certs
