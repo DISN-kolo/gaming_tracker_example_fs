@@ -3,6 +3,7 @@ A fullstack project to learn Angular and .NET Core
 
 ## used to set the project up:
 
+### for the back:
 - `cd back`
 - `docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:10.0 dotnet new webapi -n Ggs.Api`
 - the rest of the commands share their start but have different `dotnet...` tails:
@@ -21,7 +22,12 @@ A fullstack project to learn Angular and .NET Core
 	- `docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:10.0 dotnet tool install dotnet-ef`
 	- keep in mind - it somehow created the config file plainly, while it needs to be in the `...../back/.config` folder. mv if the same thing happenned to you
 
-## start the back-only version up:
+
+### for the front:
+- `cd front`
+- `docker run --rm -v $(pwd):/app -w /app node:24.14.1-alpine sh -c "npm install -g @angular/cli@21.2.7 && ng new ggs-front --directory . --skip-git --style css --no-ssr"`
+
+## start the back-only version up if you need to:
 
 - launch the docker: `docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build back db`
 - connect for testing: `openssl s_client -connect localhost:8443`
