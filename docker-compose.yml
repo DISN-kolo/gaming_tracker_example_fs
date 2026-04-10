@@ -28,7 +28,9 @@ services:
     depends_on:
       - back
     ports:
-      - "3000:3000"
+      - "3000:443"
+    volumes:
+      - ./certs:/certs
     env_file:
       - .env
     networks:
