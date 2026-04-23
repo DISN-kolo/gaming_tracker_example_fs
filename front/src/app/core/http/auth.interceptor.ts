@@ -5,5 +5,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authedRequest = req.clone({
     headers: req.headers.set('Authorization', `Bearer ${token}`)
   });
+  console.error("Just logged an intercept for: ", req);
   return next(authedRequest);
 };
