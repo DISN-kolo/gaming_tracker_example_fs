@@ -19,15 +19,16 @@ public class GamesController : ControllerBase
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<GameDto>>> GetAll()
+	public async Task<ActionResult<IEnumerable<GameResponse>>> GetAll()
 	{
+		// these 'User's actually come from ControllerBase.
 		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 		var games = await _gameService.GetAllAsync(userId);
 		return Ok(games);
 	}
 
 	[HttpGet("{id}")]
-	public async Task<ActionResult<GameDto>> GetById(Guid id)
+	public async Task<ActionResult<GameResponse>> GetById(Guid id)
 	{
 		var game = await _gameService.GetByIdAsync(id);
 		if (game is null)
@@ -38,7 +39,7 @@ public class GamesController : ControllerBase
 	}
 
 	[HttpPost]
-	public async Task<ActionResult<GameDto>> Create(CreateGameRequest request)
+	public async Task<ActionResult<GameResponse>> Create(CreateGameRequest request)
 	{
 		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 		var game = await _gameService.CreateAsync(userId, request);

@@ -1,6 +1,6 @@
 namespace Ggs.Api.DTOs;
 
-public class GameDto
+public class GameResponse
 {
 	public Guid Id { get; set; }
 	public string Title { get; set; }

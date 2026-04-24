@@ -12,4 +12,7 @@ public class RegisterRequest
 	[Required]
 	[MinLength(8)]
 	public string Password { get; set; }
+
+	[Required]
+	public string Name { get; set; }
 }

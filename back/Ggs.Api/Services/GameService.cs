@@ -14,11 +14,11 @@ public class GameService
 		_context = context;
 	}
 
-	public async Task<IEnumerable<GameDto>> GetAllAsync(Guid userId)
+	public async Task<IEnumerable<GameResponse>> GetAllAsync(Guid userId)
 	{
 		return await _context.Games
 			.Where(g => g.UserId == userId)
-			.Select(g => new GameDto
+			.Select(g => new GameResponse
 			{
 				Id = g.Id,
 				Title = g.Title,
@@ -26,21 +26,21 @@ public class GameService
 			.ToListAsync();
 	}
 
-	public async Task<GameDto?> GetByIdAsync(Guid id)
+	public async Task<GameResponse?> GetByIdAsync(Guid id)
 	{
 		var game = await _context.Games.FindAsync(id);
 		if (game is null)
 		{
 			return null;
 		}
-		return new GameDto
+		return new GameResponse
 		{
 			Id = game.Id,
 			Title = game.Title,
 		};
 	}
 
-	public async Task<GameDto> CreateAsync(Guid userId, CreateGameRequest request)
+	public async Task<GameResponse> CreateAsync(Guid userId, CreateGameRequest request)
 	{
 		var game = new Game
 		{
@@ -51,7 +51,7 @@ public class GameService
 		_context.Games.Add(game);
 		await _context.SaveChangesAsync();
 
-		return new GameDto
+		return new GameResponse
 		{
 			Id = game.Id,
 			Title = game.Title,

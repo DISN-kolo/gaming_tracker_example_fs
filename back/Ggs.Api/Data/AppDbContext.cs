@@ -39,6 +39,9 @@ public class AppDbContext : DbContext
 
 			entity.HasIndex(u => u.Email)
 			.IsUnique();
+
+			entity.Property(u => u.Name)
+			.IsRequired();
 		});
 	}
 }

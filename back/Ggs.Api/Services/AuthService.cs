@@ -32,6 +32,7 @@ public class AuthService
 		{
 			Id = Guid.NewGuid(),
 			Email = request.Email,
+			Name = request.Name,
 			Games = new List<Game>(),
 		};
 		var hasher = new PasswordHasher<User>();
@@ -59,6 +60,18 @@ public class AuthService
 		}
 
 		return new AuthResponse { Token = GenerateToken(user) };
+	}
+
+	public async Task<MeResponse?> MeAsync(Guid userId)
+	{
+		return await _context.Users
+			.Where(u => u.Id == userId)
+			.Select(u => new MeResponse
+			{
+				Name = u.Name,
+				Email = u.Email,
+			})
+			.SingleOrDefaultAsync();
 	}
 
 	private string GenerateToken(User user)
