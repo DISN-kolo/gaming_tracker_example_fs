@@ -2,6 +2,7 @@ using System.Text;
 using Ggs.Api.Data;
 using Ggs.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -33,6 +34,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddScoped<GameService>();
 builder.Services.AddScoped<AuthService>();
 
+builder.Services
+.AddCors(options =>
+{
+	options.AddPolicy("MyCorsPolicy", policy =>
+	{
+		policy.WithOrigins(builder.Configuration["FRONT_URL"]!)
+		.AllowAnyHeader()
+		.AllowAnyMethod();
+	});
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -44,6 +56,7 @@ app.UseHttpLogging();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("MyCorsPolicy");
 app.MapControllers();
 
 app.Run();

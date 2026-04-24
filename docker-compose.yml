@@ -16,6 +16,7 @@ services:
       - ASPNETCORE_URLS=https://+:8443
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/certs/cert.pem
       - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/certs/cert-key.pem
+      - FRONT_URL=${FRONT_URL}
     networks:
       - back_net
       - db_net
