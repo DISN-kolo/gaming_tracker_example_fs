@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
 })
 export class Login {
@@ -17,6 +18,8 @@ export class Login {
 
   authService = inject(AuthService);
 
+  router = inject(Router);
+
   submit() {
     if (this.form.invalid) {
       console.error("form invalid");
@@ -26,7 +29,10 @@ export class Login {
     console.log(this.form.value);
     const { email, password } = this.form.value;
     this.authService.login(email!, password!).subscribe({
-      next: (res) => console.log(res),
+      next: (res) => {
+        localStorage.setItem('token', res.token!);
+        this.router.navigate(['/']);
+      },
       error: (err) => console.error(err),
     })
   }

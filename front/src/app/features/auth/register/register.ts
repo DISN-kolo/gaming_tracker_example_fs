@@ -1,7 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-register',
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './register.html',
 })
-export class Register {}
+export class Register {
+  form = inject(FormBuilder)
+  .group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+  });
+
+  authService = inject(AuthService);
+
+  router = inject(Router);
+
+  submit() {
+    if (this.form.invalid) {
+      console.error("form invalid");
+      return ;
+    }
+    console.log("form valid");
+    console.log(this.form.value);
+    const { email, password } = this.form.value;
+    this.authService.register(email!, password!).subscribe({
+      next: (res) => {
+        localStorage.setItem('token', res.token!);
+        this.router.navigate(['/']);
+      },
+      error: (err) => console.error(err),
+    })
+  }
+};

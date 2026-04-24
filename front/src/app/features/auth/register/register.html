@@ -1,1 +1,7 @@
-<p>Register (placeholder)</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+	<input formControlName="email" type="email" />
+	<input formControlName="password" type="password" />
+	<button type="submit">Register</button>
+</form>
+<p>Have an account? You can login:</p>
+<button routerLink="/login">Login</button>
