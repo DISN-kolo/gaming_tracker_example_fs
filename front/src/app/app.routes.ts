@@ -23,4 +23,9 @@ export const routes: Routes = [
     loadComponent: () => import('./features/library/library-list/library-list')
     .then(m => m.LibraryList)
   },
+  {
+    path: '**',
+    loadComponent: () => import('./features/not-found/not-found')
+    .then(m => m.NotFound)
+  },
 ];
