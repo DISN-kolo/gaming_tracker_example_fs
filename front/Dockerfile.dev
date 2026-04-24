@@ -5,4 +5,4 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
-CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--poll", "2000", "--ssl", "--ssl-cert", "/certs/cert.pem", "--ssl-key", "/certs/cert-key.pem", "--proxy-config", "proxy.conf.js"]
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--poll", "2000", "--ssl", "--ssl-cert", "/certs/cert.pem", "--ssl-key", "/certs/cert-key.pem"]
