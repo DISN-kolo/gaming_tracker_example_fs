@@ -1,7 +1,24 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-	<input formControlName="email" type="email" />
-	<input formControlName="password" type="password" />
-	<button type="submit">Register</button>
-</form>
-<p>Have an account? You can login:</p>
-<button routerLink="/login">Login</button>
+<div class="page-center">
+  <mat-card class="auth-card">
+    <mat-card-title>Register</mat-card-title>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+      </mat-form-field>
+
+      <button mat-flat-button type="submit">Register</button>
+    </form>
+
+    <p class="auth-hint">
+      Already have an account?
+      <a routerLink="/login">Log in instead</a>
+    </p>
+  </mat-card>
+</div>
