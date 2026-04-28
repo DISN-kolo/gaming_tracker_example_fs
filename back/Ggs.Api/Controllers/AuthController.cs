@@ -25,6 +25,8 @@ public class AuthController : ControllerBase
 		{
 			return Conflict("email already in use");
 		}
+		// TODO clearly, this is not ALL the response handling we can have.
+		//I'm getting 400s with 'OK's in it, which is not how you do it.
 		return Ok(response);
 	}
 

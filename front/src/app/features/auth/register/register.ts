@@ -19,6 +19,7 @@ export class Register {
   .group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
+    username: ['', Validators.required],
   });
 
   authService = inject(AuthService);
@@ -32,8 +33,8 @@ export class Register {
     }
     console.log("form valid");
     console.log(this.form.value);
-    const { email, password } = this.form.value;
-    this.authService.register(email!, password!).subscribe({
+    const { email, password, username } = this.form.value;
+    this.authService.register(email!, password!, username!).subscribe({
       next: (res) => {
         localStorage.setItem('token', res.token!);
         this.router.navigate(['/']);
