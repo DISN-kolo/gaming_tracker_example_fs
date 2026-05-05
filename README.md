@@ -31,3 +31,6 @@ A fullstack project to learn Angular and .NET Core
 
 - launch the docker: `docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build back db`
 - connect for testing: `openssl s_client -connect localhost:8443`
+
+## stuff:
+- the defer wrap doesn't defer the actual http load. So for it to function properly, it needs to wrap some loading code instead.
