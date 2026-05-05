@@ -14,14 +14,28 @@ public class GameService
 		_context = context;
 	}
 
-	public async Task<IEnumerable<GameResponse>> GetAllAsync(Guid userId)
+	public async Task<IEnumerable<GameResponse>> GetCatalogAsync()
 	{
 		return await _context.Games
-			.Where(g => g.UserId == userId)
 			.Select(g => new GameResponse
 			{
 				Id = g.Id,
 				Title = g.Title,
+				SubmittedById = g.SubmittedById,
+			})
+			.ToListAsync();
+	}
+
+	public async Task<IEnumerable<GameResponse>> GetLibraryAsync(Guid userId)
+	{
+		return await _context.Users
+			.Where(u => u.Id == userId)
+			.SelectMany(u => u.Library)
+			.Select(g => new GameResponse
+			{
+				Id = g.Id,
+				Title = g.Title,
+				SubmittedById = g.SubmittedById,
 			})
 			.ToListAsync();
 	}
@@ -37,16 +51,17 @@ public class GameService
 		{
 			Id = game.Id,
 			Title = game.Title,
+			SubmittedById = game.SubmittedById,
 		};
 	}
 
-	public async Task<GameResponse> CreateAsync(Guid userId, CreateGameRequest request)
+	public async Task<GameResponse> SubmitAsync(Guid userId, CreateGameRequest request)
 	{
 		var game = new Game
 		{
 			Id = Guid.NewGuid(),
 			Title = request.Title,
-			UserId = userId,
+			SubmittedById = userId,
 		};
 		_context.Games.Add(game);
 		await _context.SaveChangesAsync();
@@ -55,13 +70,63 @@ public class GameService
 		{
 			Id = game.Id,
 			Title = game.Title,
+			SubmittedById = game.SubmittedById,
 		};
 	}
 
-	public async Task<bool> DeleteAsync(Guid id)
+	public async Task<bool> AddToLibraryAsync(Guid userId, Guid gameId)
 	{
-		var game = await _context.Games.FindAsync(id);
+		var user = await _context.Users
+			.Include(u => u.Library)
+			.FirstOrDefaultAsync(u => u.Id == userId);
+
+		if (user is null)
+		{
+			return false;
+		}
+
+		var game = await _context.Games.FindAsync(gameId);
 		if (game is null)
+		{
+			return false;
+		}
+
+		if (user.Library.Any(g => g.Id == gameId))
+		{
+			return true;
+		}
+
+		user.Library.Add(game);
+		await _context.SaveChangesAsync();
+		return true;
+	}
+
+	public async Task<bool> RemoveFromLibraryAsync(Guid userId, Guid gameId)
+	{
+		var user = await _context.Users
+			.Include(u => u.Library)
+			.FirstOrDefaultAsync(u => u.Id == userId);
+
+		if (user is null)
+		{
+			return false;
+		}
+
+		var game = user.Library.FirstOrDefault(g => g.Id == gameId);
+		if (game is null)
+		{
+			return false;
+		}
+
+		user.Library.Remove(game);
+		await _context.SaveChangesAsync();
+		return true;
+	}
+
+	public async Task<bool> DeleteAsync(Guid gameId, Guid userId)
+	{
+		var game = await _context.Games.FindAsync(gameId);
+		if (game is null || game.SubmittedById != userId)
 		{
 			return false;
 		}

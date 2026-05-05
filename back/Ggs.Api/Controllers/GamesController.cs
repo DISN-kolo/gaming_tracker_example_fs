@@ -19,11 +19,17 @@ public class GamesController : ControllerBase
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<GameResponse>>> GetAll()
+	public async Task<ActionResult<IEnumerable<GameResponse>>> GetCatalog()
 	{
-		// these 'User's actually come from ControllerBase.
+		var games = await _gameService.GetCatalogAsync();
+		return Ok(games);
+	}
+
+	[HttpGet("library")]
+	public async Task<ActionResult<IEnumerable<GameResponse>>> GetLibrary()
+	{
 		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-		var games = await _gameService.GetAllAsync(userId);
+		var games = await _gameService.GetLibraryAsync(userId);
 		return Ok(games);
 	}
 
@@ -39,17 +45,42 @@ public class GamesController : ControllerBase
 	}
 
 	[HttpPost]
-	public async Task<ActionResult<GameResponse>> Create(CreateGameRequest request)
+	public async Task<ActionResult<GameResponse>> Submit(CreateGameRequest request)
 	{
 		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-		var game = await _gameService.CreateAsync(userId, request);
+		var game = await _gameService.SubmitAsync(userId, request);
 		return CreatedAtAction(nameof(GetById), new { id = game.Id }, game);
+	}
+
+	[HttpPost("{id}/library")]
+	public async Task<IActionResult> AddToLibrary(Guid id)
+	{
+		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+		var success = await _gameService.AddToLibraryAsync(userId, id);
+		if (!success)
+		{
+			return NotFound();
+		}
+		return NoContent();
+	}
+
+	[HttpDelete("{id}/library")]
+	public async Task<IActionResult> RemoveFromLibrary(Guid id)
+	{
+		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+		var success = await _gameService.RemoveFromLibraryAsync(userId, id);
+		if (!success)
+		{
+			return NotFound();
+		}
+		return NoContent();
 	}
 
 	[HttpDelete("{id}")]
 	public async Task<IActionResult> Delete(Guid id)
 	{
-		var success = await _gameService.DeleteAsync(id);
+		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+		var success = await _gameService.DeleteAsync(id, userId);
 		if (!success)
 		{
 			return NotFound();

@@ -24,9 +24,10 @@ public class AppDbContext : DbContext
 			.IsRequired()
 			.HasMaxLength(200);
 
-			entity.HasOne(g => g.Owner)
-			.WithMany(u => u.Games)
-			.HasForeignKey(g => g.UserId);
+			entity.HasOne(g => g.SubmittedBy)
+			.WithMany(u => u.SubmittedGames)
+			.HasForeignKey(g => g.SubmittedById)
+			.OnDelete(DeleteBehavior.SetNull);
 		});
 
 		modelBuilder.Entity<User>(entity =>
@@ -42,6 +43,10 @@ public class AppDbContext : DbContext
 
 			entity.Property(u => u.Name)
 			.IsRequired();
+
+			entity.HasMany(u => u.Library)
+			.WithMany(g => g.LibraryUsers)
+			.UsingEntity(j => j.ToTable("UserGame"));
 		});
 	}
 }

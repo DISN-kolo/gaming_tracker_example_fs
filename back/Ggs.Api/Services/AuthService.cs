@@ -34,7 +34,7 @@ public class AuthService
 			Id = Guid.NewGuid(),
 			Email = request.Email,
 			Name = request.Name,
-			Games = new List<Game>(),
+			SubmittedGames = new List<Game>(),
 		};
 		var hasher = new PasswordHasher<User>();
 		user.PasswordHash = hasher.HashPassword(user, request.Password);
