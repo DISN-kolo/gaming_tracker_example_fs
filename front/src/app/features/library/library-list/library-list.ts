@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 
-import { AuthService } from '../../../core/auth/auth.service';
+import { UserService } from '../../../core/user/user.service';
 
 @Component({
   imports: [ AsyncPipe ],
@@ -12,8 +12,8 @@ import { AuthService } from '../../../core/auth/auth.service';
 export class LibraryList {
   router = inject(Router);
 
-  authService = inject(AuthService);
-  userinfo$ = this.authService.me();
+  userService = inject(UserService);
+  userinfo$ = this.userService.me();
 
   logout() {
     localStorage.removeItem('token');

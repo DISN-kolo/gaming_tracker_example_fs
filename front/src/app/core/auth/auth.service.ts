@@ -13,7 +13,4 @@ export class AuthService {
   register(email: string, password: string, username: string) {
     return this.http.post<{ token: string }>(`${environment.apiUrl}/api/auth/register/`, { email, password, name: username });
   };
-  me() {
-    return this.http.get<{ username: string, email: string }>(`${environment.apiUrl}/api/auth/me/`);
-  };
 };
