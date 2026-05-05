@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { UserService } from '../../../core/user/user.service';
 
@@ -13,7 +14,7 @@ export class LibraryList {
   router = inject(Router);
 
   userService = inject(UserService);
-  userinfo$ = this.userService.me();
+  userinfo = toSignal(this.userService.me());
 
   logout() {
     localStorage.removeItem('token');

@@ -1,12 +1,10 @@
 <p>Library list (placeholder)</p>
-@defer (on viewport) {
-	<p>Hello, {{ (userinfo$ | async)?.username }}</p>
-} @placeholder {
-	<p>&nbsp;</p>
-} @loading (after 100ms; minimum 500ms) {
-	<p class="username-loading">...</p>
-} @error {
-	<p>Couldn't load user</p>
+@if (userinfo() === undefined) {
+	<p>Hello, user...<p>
+} @else if (userinfo()!.hasOwnProperty('username')) {
+	<p>Hello, {{ userinfo()!.username }}</p>
+} @else {
+	<p>Failed to load user</p>
 }
 <button (click)="logout()">Log out</button>
 <ul class="library-list">
