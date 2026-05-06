@@ -8,6 +8,6 @@ export class GameService {
   private http = inject(HttpClient);
 
   getLibrary() {
-    return this.http.get<{ id: string, title: string, submittedBy: string | null }>(`${environment.apiUrl}/api/games/library`);
+    return this.http.get<{ id: string, title: string, submittedBy: string | null }[]>(`${environment.apiUrl}/api/games/library`);
   };
 };

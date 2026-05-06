@@ -13,8 +13,8 @@
 	} @else if (isGamesEmpty()) {
 		<p>Your library is empty</p>
 	} @else {
-		@for (game of games()!; track game.id) {
-			<li><app-library-entry [game]="game" /></li>
+		@for (gamesElement of games()!; track gamesElement.id) {
+			<li><app-library-entry [game]="gamesElement" /></li>
 	}
 }
 </ul>

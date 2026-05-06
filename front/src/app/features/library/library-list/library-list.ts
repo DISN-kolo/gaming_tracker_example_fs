@@ -1,13 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
 
+import { LibraryEntry } from '../library-entry/library-entry';
+
 @Component({
-  imports: [ AsyncPipe ],
+  imports: [ LibraryEntry ],
   selector: 'app-library-list',
   templateUrl: './library-list.html',
 })
