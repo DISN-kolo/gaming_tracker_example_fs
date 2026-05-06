@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
   imports: [RouterLink],
   selector: 'app-navbar',
   templateUrl: './navbar.html',
+  styleUrl: './navbar.css',
 })
 export class Navbar {
   private router = inject(Router);
