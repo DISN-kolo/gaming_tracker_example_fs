@@ -6,9 +6,10 @@ import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
 
 import { LibraryEntry } from '../library-entry/library-entry';
+import { LibraryNewEntry } from '../library-new-entry/library-new-entry';
 
 @Component({
-  imports: [ LibraryEntry ],
+  imports: [ LibraryEntry, LibraryNewEntry ],
   selector: 'app-library-list',
   templateUrl: './library-list.html',
 })

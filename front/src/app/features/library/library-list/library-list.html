@@ -11,10 +11,11 @@
 	@if (games() === undefined) {
 		<li>Loading games...</li>
 	} @else if (isGamesEmpty()) {
-		<p>Your library is empty</p>
+		<li>Your library is empty</li>
 	} @else {
 		@for (gamesElement of games()!; track gamesElement.id) {
 			<li><app-library-entry [game]="gamesElement" /></li>
+		}
 	}
-}
+	<li><app-library-new-entry /></li>
 </ul>

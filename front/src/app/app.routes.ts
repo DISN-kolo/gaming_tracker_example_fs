@@ -18,10 +18,17 @@ export const routes: Routes = [
     .then(m => m.Register)
   },
   {
-    path: 'library',
+    path: '',
     canActivate: [authGuard],
-    loadComponent: () => import('./features/library/library-list/library-list')
-    .then(m => m.LibraryList)
+    loadComponent: () => import('./core/layout/layout')
+    .then(m => m.Layout),
+    children: [
+      {
+        path: 'library',
+        loadComponent: () => import('./features/library/library-list/library-list')
+        .then(m => m.LibraryList)
+      },
+    ]
   },
   {
     path: '**',
