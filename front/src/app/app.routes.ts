@@ -28,6 +28,11 @@ export const routes: Routes = [
         loadComponent: () => import('./features/library/library-list/library-list')
         .then(m => m.LibraryList)
       },
+      {
+        path: 'catalog',
+        loadComponent: () => import('./features/games/games-list/games-list')
+        .then(m => m.GamesList)
+      },
     ]
   },
   {

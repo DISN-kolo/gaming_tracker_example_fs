@@ -10,4 +10,7 @@ export class GameService {
   getLibrary() {
     return this.http.get<{ id: string, title: string, submittedBy: string | null }[]>(`${environment.apiUrl}/api/games/library`);
   };
+  getGames() {
+    return this.http.get<{ id: string, title: string, submittedBy: string | null }[]>(`${environment.apiUrl}/api/games`);
+  };
 };

@@ -6,16 +6,15 @@
 } @else {
 	<p>Failed to load user</p>
 }
-<button (click)="logout()">Log out</button>
 <ul class="library-list">
-	@if (games() === undefined) {
-		<li>Loading games...</li>
-	} @else if (isGamesEmpty()) {
+	<li><app-library-new-entry /></li>
+	@if (library() === undefined) {
+		<li>Loading library...</li>
+	} @else if (isLibraryEmpty()) {
 		<li>Your library is empty</li>
 	} @else {
-		@for (gamesElement of games()!; track gamesElement.id) {
-			<li><app-library-entry [game]="gamesElement" /></li>
+		@for (libraryElement of library()!; track libraryElement.id) {
+			<li><app-library-entry [game]="libraryElement" /></li>
 		}
 	}
-	<li><app-library-new-entry /></li>
 </ul>

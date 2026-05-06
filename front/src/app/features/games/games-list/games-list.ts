@@ -5,25 +5,25 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
 
-import { LibraryEntry } from '../library-entry/library-entry';
-import { LibraryNewEntry } from '../library-new-entry/library-new-entry';
+import { GameEntry } from '../game-entry/game-entry';
+import { GameNewEntry } from '../game-new-entry/game-new-entry';
 
 @Component({
-  imports: [ LibraryEntry, LibraryNewEntry ],
-  selector: 'app-library-list',
-  templateUrl: './library-list.html',
+  imports: [ GameEntry, GameNewEntry ],
+  selector: 'app-games-list',
+  templateUrl: './games-list.html',
 })
-export class LibraryList {
+export class GamesList {
   router = inject(Router);
 
   userService = inject(UserService);
   userinfo = toSignal(this.userService.me());
 
   gameService = inject(GameService);
-  library = toSignal(this.gameService.getLibrary());
+  games = toSignal(this.gameService.getGames());
 
-  isLibraryEmpty() {
-    const l = this.library();
-    return l === undefined || Object.keys(l).length === 0;
+  isGamesEmpty() {
+    const g = this.games();
+    return g === undefined || Object.keys(g).length === 0;
   }
 }
