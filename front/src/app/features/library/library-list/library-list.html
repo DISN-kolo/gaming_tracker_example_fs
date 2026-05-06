@@ -8,9 +8,13 @@
 }
 <button (click)="logout()">Log out</button>
 <ul class="library-list">
-	<li>lol</li>
-	<li>lol</li>
-	<li>lol</li>
-	<li>lol</li>
-	<li>lol</li>
+	@if (games() === undefined) {
+		<li>Loading games...</li>
+	} @else if (isGamesEmpty()) {
+		<p>Your library is empty</p>
+	} @else {
+		@for (game of games()!; track game.id) {
+			<li><app-library-entry [game]="game" /></li>
+	}
+}
 </ul>
