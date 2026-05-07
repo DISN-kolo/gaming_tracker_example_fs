@@ -8,13 +8,16 @@ export class GameService {
   private http = inject(HttpClient);
 
   getLibrary() {
-    return this.http.get<{ id: string, title: string, submittedBy: string | null }[]>(`${environment.apiUrl}/api/games/library`);
+    return this.http.get<{ id: string, title: string, releaseYear: number | null, description: string | null, submittedById: string | null }[]>(`${environment.apiUrl}/api/games/library`);
   };
   getGames() {
-    return this.http.get<{ id: string, title: string, submittedBy: string | null }[]>(`${environment.apiUrl}/api/games`);
+    return this.http.get<{ id: string, title: string, releaseYear: number | null, description: string | null, submittedById: string | null }[]>(`${environment.apiUrl}/api/games`);
   };
 
-  createGame(title: string) {
-    return this.http.post<{ id: string, title: string, submittedById: string | null }>(`${environment.apiUrl}/api/games`, { title });
+  createGame(title: string, releaseYear: number | null, description: string | null) {
+    return this.http.post<{ id: string, title: string, releaseYear: number | null, description: string | null, submittedById: string | null }>(
+      `${environment.apiUrl}/api/games`,
+      { title, releaseYear, description }
+    );
   };
 };

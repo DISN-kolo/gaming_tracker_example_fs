@@ -1,3 +1,40 @@
-.entry-card {
-	width: 100%;
+.game-card {
+	background-color: #313131;
+	border-radius: 6px;
+	height: 10vh;
+	padding: 0 0.5rem 0 1.25rem;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2px;
+}
+
+.game-card__header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.game-card__title {
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+.game-card__year {
+	font-size: 0.9rem;
+	color: #aaaaaa;
+}
+
+.spacer {
+	flex: 1;
+}
+
+.game-card__description {
+	margin: 0;
+	font-size: 0.85rem;
+	color: #aaaaaa;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }

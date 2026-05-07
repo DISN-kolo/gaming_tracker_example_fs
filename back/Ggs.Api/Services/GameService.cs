@@ -21,6 +21,8 @@ public class GameService
 			{
 				Id = g.Id,
 				Title = g.Title,
+				ReleaseYear = g.ReleaseYear,
+				Description = g.Description,
 				SubmittedById = g.SubmittedById,
 			})
 			.ToListAsync();
@@ -35,6 +37,8 @@ public class GameService
 			{
 				Id = g.Id,
 				Title = g.Title,
+				ReleaseYear = g.ReleaseYear,
+				Description = g.Description,
 				SubmittedById = g.SubmittedById,
 			})
 			.ToListAsync();
@@ -51,6 +55,8 @@ public class GameService
 		{
 			Id = game.Id,
 			Title = game.Title,
+			ReleaseYear = game.ReleaseYear,
+			Description = game.Description,
 			SubmittedById = game.SubmittedById,
 		};
 	}
@@ -61,6 +67,8 @@ public class GameService
 		{
 			Id = Guid.NewGuid(),
 			Title = request.Title,
+			ReleaseYear = request.ReleaseYear,
+			Description = request.Description,
 			SubmittedById = userId,
 		};
 		_context.Games.Add(game);
@@ -70,6 +78,8 @@ public class GameService
 		{
 			Id = game.Id,
 			Title = game.Title,
+			ReleaseYear = game.ReleaseYear,
+			Description = game.Description,
 			SubmittedById = game.SubmittedById,
 		};
 	}

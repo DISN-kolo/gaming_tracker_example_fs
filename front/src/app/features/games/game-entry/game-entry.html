@@ -1,3 +1,15 @@
-<div class="entry-card">
-	<p>Hello, world</p>
+<div class="game-card">
+	<div class="game-card__header">
+		<span class="game-card__title">{{ game().title }}</span>
+		@if (game().releaseYear) {
+			<span class="game-card__year">({{ game().releaseYear }})</span>
+		}
+		<span class="spacer"></span>
+		<button mat-icon-button>
+			<mat-icon>more_vert</mat-icon>
+		</button>
+	</div>
+	@if (game().description) {
+		<p class="game-card__description">{{ game().description }}</p>
+	}
 </div>

@@ -5,5 +5,11 @@ import { Component, input } from '@angular/core';
   templateUrl: './library-entry.html'
 })
 export class LibraryEntry {
-  game = input.required<{ id: string, title: string, submittedBy: string | null }>();
+  game = input.required<{
+    id: string,
+    title: string,
+    releaseYear: number | null,
+    description: string | null,
+    submittedById: string | null,
+  }>();
 };

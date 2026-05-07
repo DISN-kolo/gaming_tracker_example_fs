@@ -6,6 +6,16 @@
       <mat-label>Title</mat-label>
       <input matInput formControlName="title" placeholder="e.g. Dark Souls" />
     </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Release year</mat-label>
+      <input matInput formControlName="releaseYear" type="number" placeholder="e.g. 2011" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="3" placeholder="Short description..."></textarea>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 

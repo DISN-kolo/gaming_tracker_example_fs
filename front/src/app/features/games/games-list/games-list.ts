@@ -13,6 +13,7 @@ import { GameNewEntry } from '../game-new-entry/game-new-entry';
   imports: [GameEntry, GameNewEntry],
   selector: 'app-games-list',
   templateUrl: './games-list.html',
+  styleUrl: './games-list.css',
 })
 export class GamesList {
   router = inject(Router);

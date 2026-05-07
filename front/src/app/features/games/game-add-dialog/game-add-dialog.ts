@@ -34,11 +34,14 @@ export class GameAddDialog {
 
   form = inject(FormBuilder).group({
     title: ['', [Validators.required, Validators.maxLength(200)]],
+    releaseYear: [null as number | null],
+    description: [null as string | null, Validators.maxLength(512)],
   });
 
   submit() {
     if (this.form.invalid) return;
-    this.gameService.createGame(this.form.value.title!).subscribe({
+    const { title, releaseYear, description } = this.form.value;
+    this.gameService.createGame(title!, releaseYear ?? null, description ?? null).subscribe({
       next: () => this.dialogRef.close(true),
       error: (err) => console.error(err),
     });
