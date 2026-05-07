@@ -31,3 +31,7 @@ A fullstack project to learn Angular and .NET Core
 
 - launch the docker: `docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build back db`
 - connect for testing: `openssl s_client -connect localhost:8443`
+
+## misc notes and such:
+
+- please manage the colors, sizes and spacings of form-related suff. Also, maybe not get the description past the kebab menu?
