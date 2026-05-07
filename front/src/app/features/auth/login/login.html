@@ -1,24 +1,24 @@
 <div class="page-center">
-  <mat-card class="auth-card">
-    <mat-card-title>Login</mat-card-title>
+	<mat-card class="auth-card">
+		<mat-card-title>Login</mat-card-title>
 
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" />
-      </mat-form-field>
+		<form [formGroup]="form" (ngSubmit)="submit()">
+			<mat-form-field appearance="outline">
+				<mat-label>Email</mat-label>
+				<input matInput formControlName="email" type="email" />
+			</mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" />
-      </mat-form-field>
+			<mat-form-field appearance="outline">
+				<mat-label>Password</mat-label>
+				<input matInput formControlName="password" type="password" />
+			</mat-form-field>
 
-      <button mat-flat-button type="submit">Log in</button>
-    </form>
+			<button mat-flat-button type="submit">Log in</button>
+		</form>
 
-    <p class="auth-hint">
-      No account yet?
-      <a routerLink="/register">Register instead</a>
-    </p>
-  </mat-card>
+		<p class="auth-hint">
+			No account yet?
+			<a routerLink="/register">Register instead</a>
+		</p>
+	</mat-card>
 </div>
