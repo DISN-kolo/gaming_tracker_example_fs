@@ -7,7 +7,7 @@ import {
   MatDialogActions,
   MatDialogClose,
 } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 
@@ -25,6 +25,7 @@ import { GameService } from '../../../core/game/game.service';
     MatLabel,
     MatInput,
     MatButton,
+    MatHint
   ],
   templateUrl: './game-add-dialog.html',
 })
