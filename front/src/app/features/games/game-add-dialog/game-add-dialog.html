@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Add a game</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" id="game-add-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" placeholder="e.g. Dark Souls" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button (click)="submit()" [disabled]="form.invalid">Add</button>
+</mat-dialog-actions>

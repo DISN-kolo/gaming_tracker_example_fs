@@ -13,4 +13,8 @@ export class GameService {
   getGames() {
     return this.http.get<{ id: string, title: string, submittedBy: string | null }[]>(`${environment.apiUrl}/api/games`);
   };
+
+  createGame(title: string) {
+    return this.http.post<{ id: string, title: string, submittedById: string | null }>(`${environment.apiUrl}/api/games`, { title });
+  };
 };

@@ -7,7 +7,7 @@
 	<p>Failed to load user</p>
 }
 <ul class="games-list">
-	<li><app-game-new-entry /></li>
+	<li><app-game-new-entry (gameAdded)="refreshGames()" /></li>
 	@if (games() === undefined) {
 		<li>Loading games...</li>
 	} @else if (isGamesEmpty()) {
