@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Ggs.Domain\Ggs.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Watch Remove="**/*.swp;**/*.swo;**/*~" />
+  </ItemGroup>
+
 </Project>
