@@ -1,14 +1,14 @@
-namespace Ggs.Domain.Models;
+using Ggs.Domain.Models;
 
-public class Game
+namespace Ggs.Api.DTOs;
+
+public class LibraryEntryResponse
 {
 	public Guid Id { get; set; }
 	public string Title { get; set; }
 	public int? ReleaseYear { get; set; }
 	public string? Description { get; set; }
-
 	public Guid? SubmittedById { get; set; }
-	public User? SubmittedBy { get; set; }
-
-	public ICollection<UserGameEntry> LibraryEntries { get; set; }
+	public CompletionStatus Status { get; set; }
+	public int? Rating { get; set; }
 }

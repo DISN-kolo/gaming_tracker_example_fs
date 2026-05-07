@@ -26,7 +26,7 @@ public class GamesController : ControllerBase
 	}
 
 	[HttpGet("library")]
-	public async Task<ActionResult<IEnumerable<GameResponse>>> GetLibrary()
+	public async Task<ActionResult<IEnumerable<LibraryEntryResponse>>> GetLibrary()
 	{
 		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 		var games = await _gameService.GetLibraryAsync(userId);
@@ -53,10 +53,10 @@ public class GamesController : ControllerBase
 	}
 
 	[HttpPost("{id}/library")]
-	public async Task<IActionResult> AddToLibrary(Guid id)
+	public async Task<IActionResult> AddToLibrary(Guid id, CreateLibraryEntryRequest request)
 	{
 		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-		var success = await _gameService.AddToLibraryAsync(userId, id);
+		var success = await _gameService.AddToLibraryAsync(userId, id, request);
 		if (!success)
 		{
 			return NotFound();

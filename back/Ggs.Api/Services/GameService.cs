@@ -30,18 +30,19 @@ public class GameService
 		return result;
 	}
 
-	public async Task<IEnumerable<GameResponse>> GetLibraryAsync(Guid userId)
+	public async Task<IEnumerable<LibraryEntryResponse>> GetLibraryAsync(Guid userId)
 	{
-		return await _context.Users
-			.Where(u => u.Id == userId)
-			.SelectMany(u => u.Library)
-			.Select(g => new GameResponse
+		return await _context.UserGameEntries
+			.Where(e => e.UserId == userId)
+			.Select(e => new LibraryEntryResponse
 			{
-				Id = g.Id,
-				Title = g.Title,
-				ReleaseYear = g.ReleaseYear,
-				Description = g.Description,
-				SubmittedById = g.SubmittedById,
+				Id = e.Game.Id,
+				Title = e.Game.Title,
+				ReleaseYear = e.Game.ReleaseYear,
+				Description = e.Game.Description,
+				SubmittedById = e.Game.SubmittedById,
+				Status = e.Status,
+				Rating = e.Rating,
 			})
 			.ToListAsync();
 	}
@@ -86,51 +87,38 @@ public class GameService
 		};
 	}
 
-	public async Task<bool> AddToLibraryAsync(Guid userId, Guid gameId)
+	public async Task<bool> AddToLibraryAsync(Guid userId, Guid gameId, CreateLibraryEntryRequest request)
 	{
-		var user = await _context.Users
-			.Include(u => u.Library)
-			.FirstOrDefaultAsync(u => u.Id == userId);
-
-		if (user is null)
-		{
-			return false;
-		}
+		var user = await _context.Users.FindAsync(userId);
+		if (user is null) return false;
 
 		var game = await _context.Games.FindAsync(gameId);
-		if (game is null)
-		{
-			return false;
-		}
+		if (game is null) return false;
 
-		if (user.Library.Any(g => g.Id == gameId))
-		{
-			return true;
-		}
+		var existing = await _context.UserGameEntries
+			.FirstOrDefaultAsync(e => e.UserId == userId && e.GameId == gameId);
 
-		user.Library.Add(game);
+		if (existing is not null) return true;
+
+		_context.UserGameEntries.Add(new UserGameEntry
+		{
+			UserId = userId,
+			GameId = gameId,
+			Status = request.Status,
+			Rating = request.Rating,
+		});
 		await _context.SaveChangesAsync();
 		return true;
 	}
 
 	public async Task<bool> RemoveFromLibraryAsync(Guid userId, Guid gameId)
 	{
-		var user = await _context.Users
-			.Include(u => u.Library)
-			.FirstOrDefaultAsync(u => u.Id == userId);
+		var entry = await _context.UserGameEntries
+			.FirstOrDefaultAsync(e => e.UserId == userId && e.GameId == gameId);
 
-		if (user is null)
-		{
-			return false;
-		}
+		if (entry is null) return false;
 
-		var game = user.Library.FirstOrDefault(g => g.Id == gameId);
-		if (game is null)
-		{
-			return false;
-		}
-
-		user.Library.Remove(game);
+		_context.UserGameEntries.Remove(entry);
 		await _context.SaveChangesAsync();
 		return true;
 	}

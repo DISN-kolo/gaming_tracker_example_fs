@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
 
 	public DbSet<Game> Games { get; set; }
 	public DbSet<User> Users { get; set; }
+	public DbSet<UserGameEntry> UserGameEntries { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
@@ -43,10 +44,21 @@ public class AppDbContext : DbContext
 
 			entity.Property(u => u.Name)
 			.IsRequired();
+		});
 
-			entity.HasMany(u => u.Library)
-			.WithMany(g => g.LibraryUsers)
-			.UsingEntity(j => j.ToTable("UserGame"));
+		modelBuilder.Entity<UserGameEntry>(entity =>
+		{
+			entity.HasKey(e => new { e.UserId, e.GameId });
+
+			entity.HasOne(e => e.User)
+			.WithMany(u => u.Library)
+			.HasForeignKey(e => e.UserId);
+
+			entity.HasOne(e => e.Game)
+			.WithMany(g => g.LibraryEntries)
+			.HasForeignKey(e => e.GameId);
+
+			entity.ToTable("UserGame");
 		});
 	}
 }

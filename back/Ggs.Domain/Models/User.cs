@@ -7,5 +7,5 @@ public class User
 	public string PasswordHash { get; set; }
 	public string Name { get; set; }
 	public ICollection<Game> SubmittedGames { get; set; }
-	public ICollection<Game> Library { get; set; }
+	public ICollection<UserGameEntry> Library { get; set; }
 }
