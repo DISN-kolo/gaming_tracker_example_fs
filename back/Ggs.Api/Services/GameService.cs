@@ -16,7 +16,7 @@ public class GameService
 
 	public async Task<IEnumerable<GameResponse>> GetCatalogAsync()
 	{
-		return await _context.Games
+		var result = await _context.Games
 			.Select(g => new GameResponse
 			{
 				Id = g.Id,
@@ -26,6 +26,8 @@ public class GameService
 				SubmittedById = g.SubmittedById,
 			})
 			.ToListAsync();
+		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Debug purposes split of return and await
+		return result;
 	}
 
 	public async Task<IEnumerable<GameResponse>> GetLibraryAsync(Guid userId)
