@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, map, switchMap } from 'rxjs';
 
 import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
@@ -26,6 +26,13 @@ export class GamesList {
   games = toSignal(
     this.refresh$.pipe(
       switchMap(() => this.gameService.getGames())
+    )
+  );
+
+  libraryIds = toSignal(
+    this.refresh$.pipe(
+      switchMap(() => this.gameService.getLibrary()),
+      map(entries => new Set(entries.map(e => e.id)))
     )
   );
 

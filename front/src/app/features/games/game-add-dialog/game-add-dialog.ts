@@ -40,7 +40,10 @@ export class GameAddDialog {
   });
 
   submit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      console.error("Invalid form in GameAddDialog");
+      return ;
+    }
     const { title, releaseYear, description } = this.form.value;
     this.gameService.createGame(title!, releaseYear ?? null, description ?? null).subscribe({
       next: () => this.dialogRef.close(true),

@@ -1,14 +1,20 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+
+import { GameLibraryAddDialog } from '../game-library-add-dialog/game-library-add-dialog';
 
 @Component({
   selector: 'app-game-entry',
-  imports: [MatIconButton, MatIcon],
+  imports: [MatIconButton, MatIcon, MatMenu, MatMenuTrigger, MatMenuItem],
   templateUrl: './game-entry.html',
   styleUrl: './game-entry.css',
 })
 export class GameEntry {
+  private dialog = inject(MatDialog);
+
   game = input.required<{
     id: string,
     title: string,
@@ -16,4 +22,18 @@ export class GameEntry {
     description: string | null,
     submittedById: string | null,
   }>();
+  inLibrary = input.required<boolean>();
+  libraryChanged = output<void>();
+
+  openLibraryDialog() {
+    const dialogRef = this.dialog.open(GameLibraryAddDialog, {
+      width: '420px',
+      data: this.game().id,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.libraryChanged.emit();
+      }
+    });
+  }
 }

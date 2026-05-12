@@ -30,6 +30,12 @@
 	flex: 1;
 }
 
+.game-card__library-badge {
+	font-size: 0.75rem;
+	font-style: italic;
+	color: #aaaaaa;
+}
+
 .game-card__description {
 	margin: 0;
 	font-size: 0.85rem;

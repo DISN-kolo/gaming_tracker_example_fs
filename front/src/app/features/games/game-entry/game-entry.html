@@ -1,13 +1,19 @@
 <div class="game-card">
+	@if (inLibrary()) {
+		<span class="game-card__library-badge">In Library</span>
+	}
 	<div class="game-card__header">
 		<span class="game-card__title">{{ game().title }}</span>
 		@if (game().releaseYear) {
 			<span class="game-card__year">({{ game().releaseYear }})</span>
 		}
 		<span class="spacer"></span>
-		<button mat-icon-button>
+		<button mat-icon-button [matMenuTriggerFor]="kebabMenu">
 			<mat-icon>more_vert</mat-icon>
 		</button>
+		<mat-menu #kebabMenu="matMenu">
+			<button mat-menu-item (click)="openLibraryDialog()" [disabled]="inLibrary()">Add to library</button>
+		</mat-menu>
 	</div>
 	@if (game().description) {
 		<p class="game-card__description">{{ game().description }}</p>
