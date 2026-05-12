@@ -123,6 +123,21 @@ public class GameService
 		return true;
 	}
 
+	public async Task<double?> GetAverageRatingAsync(Guid gameId)
+	{
+		var ratings = await _context.UserGameEntries
+			.Where(e => e.GameId == gameId && e.Rating != null)
+			.Select(e => (double) e.Rating!)
+			.ToListAsync();
+
+		if (ratings.Count == 0)
+		{
+			return null;
+		}
+
+		return ratings.Average();
+	}
+
 	public async Task<bool> DeleteAsync(Guid gameId, Guid userId)
 	{
 		var game = await _context.Games.FindAsync(gameId);

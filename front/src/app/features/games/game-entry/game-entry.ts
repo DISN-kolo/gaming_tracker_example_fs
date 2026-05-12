@@ -5,6 +5,7 @@ import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 
 import { GameLibraryAddDialog } from '../game-library-add-dialog/game-library-add-dialog';
+import { GameDetailDialog } from '../game-detail-dialog/game-detail-dialog';
 
 @Component({
   selector: 'app-game-entry',
@@ -24,6 +25,13 @@ export class GameEntry {
   }>();
   inLibrary = input.required<boolean>();
   libraryChanged = output<void>();
+
+  openDetailDialog() {
+    this.dialog.open(GameDetailDialog, {
+      width: '480px',
+      data: this.game().id,
+    });
+  }
 
   openLibraryDialog() {
     const dialogRef = this.dialog.open(GameLibraryAddDialog, {

@@ -14,6 +14,22 @@ export class GameService {
     return this.http.get<{ id: string, title: string, releaseYear: number | null, description: string | null, submittedById: string | null }[]>(`${environment.apiUrl}/api/games`);
   };
 
+  getById(id: string) {
+    return this.http.get<{
+      id: string,
+      title: string,
+      releaseYear: number | null,
+      description: string | null,
+      submittedById: string | null,
+    }>(`${environment.apiUrl}/api/games/${id}`);
+  };
+
+  getAverageRating(id: string) {
+    return this.http.get<{ averageRating: number | null }>(
+      `${environment.apiUrl}/api/games/${id}/avgrating`
+    );
+  };
+
   addToLibrary(gameId: string, status: string, rating: number | null) {
     return this.http.post<void>(
       `${environment.apiUrl}/api/games/${gameId}/library`,

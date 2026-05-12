@@ -1,5 +1,6 @@
 .game-card {
 	background-color: #313131;
+	cursor: pointer;
 	border-radius: 6px;
 	height: 10vh;
 	padding: 0 0.5rem 0 1.25rem;

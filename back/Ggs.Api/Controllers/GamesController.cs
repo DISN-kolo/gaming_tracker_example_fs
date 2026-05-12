@@ -76,6 +76,13 @@ public class GamesController : ControllerBase
 		return NoContent();
 	}
 
+	[HttpGet("{id}/avgrating")]
+	public async Task<IActionResult> GetAverageRating(Guid id)
+	{
+		var avg = await _gameService.GetAverageRatingAsync(id);
+		return Ok(new { averageRating = avg });
+	}
+
 	[HttpDelete("{id}")]
 	public async Task<IActionResult> Delete(Guid id)
 	{

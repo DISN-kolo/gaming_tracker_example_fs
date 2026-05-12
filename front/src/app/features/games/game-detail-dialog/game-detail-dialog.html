@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>
+	@if (detail() === undefined) {
+		Loading...
+	} @else {
+		{{ detail()!.game.title }}
+		@if (detail()!.game.releaseYear) {
+			({{ detail()!.game.releaseYear }})
+		}
+	}
+</h2>
+
+<mat-dialog-content>
+	@if (detail() !== undefined) {
+		@if (detail()!.game.description) {
+			<p>{{ detail()!.game.description }}</p>
+		} @else {
+			<p>No description.</p>
+		}
+		@if (detail()!.avgRating.averageRating !== null) {
+			<p>Average rating: {{ detail()!.avgRating.averageRating!.toFixed(1) }} / 10</p>
+		} @else {
+			<p>No ratings yet.</p>
+		}
+	}
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -1,4 +1,4 @@
-<div class="game-card">
+<div class="game-card" (click)="openDetailDialog()">
 	@if (inLibrary()) {
 		<span class="game-card__library-badge">In Library</span>
 	}
@@ -8,7 +8,7 @@
 			<span class="game-card__year">({{ game().releaseYear }})</span>
 		}
 		<span class="spacer"></span>
-		<button mat-icon-button [matMenuTriggerFor]="kebabMenu">
+		<button mat-icon-button [matMenuTriggerFor]="kebabMenu" (click)="$event.stopPropagation()">
 			<mat-icon>more_vert</mat-icon>
 		</button>
 		<mat-menu #kebabMenu="matMenu">
