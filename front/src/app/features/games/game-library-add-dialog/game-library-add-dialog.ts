@@ -30,7 +30,6 @@ function statusInList(statuses: { value: string }[]): ValidatorFn {
     if (isValid) {
       return null;
     }
-    console.error("Validation failed: status wasn't in list");
     return { invalidStatus: true };
   };
 }
