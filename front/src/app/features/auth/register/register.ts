@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { MatCard, MatCardTitle } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -26,20 +27,35 @@ export class Register {
 
   router = inject(Router);
 
+  submitError = signal<string | null>(null);
+
+  constructor() {
+    this.form.valueChanges.subscribe(() => {
+      if (this.submitError() !== null) {
+        this.submitError.set(null);
+      }
+    });
+  }
+
   submit() {
     if (this.form.invalid) {
-      console.error("form invalid");
       return ;
     }
-    console.log("form valid");
-    console.log(this.form.value);
     const { email, password, username } = this.form.value;
     this.authService.register(email!, password!, username!).subscribe({
       next: (res) => {
         localStorage.setItem('token', res.token!);
         this.router.navigate(['/']);
       },
-      error: (err) => console.error(err),
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 400) {
+          this.submitError.set('Invalid registration parameters.');
+        } else if (err.status === 0) {
+          this.submitError.set('Cannot reach the server. Check your connection and try again.');
+        } else {
+          this.submitError.set('Something went wrong. Please try again.');
+        }
+      },
     })
   }
 };

@@ -14,6 +14,10 @@
 			</mat-form-field>
 
 			<button mat-flat-button type="submit">Log in</button>
+
+			@if (submitError(); as error) {
+				<p class="submit-error" role="alert">{{ error }}</p>
+			}
 		</form>
 
 		<p class="auth-hint">
