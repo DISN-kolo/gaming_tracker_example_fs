@@ -26,6 +26,15 @@
   background-color: #ff8f00 !important;
 }
 
+.mat-mdc-form-field-hint {
+	color: #bbbbbb;
+ }
+
+.mat-mdc-input-element::placeholder,
+.mdc-text-field__input::placeholder {
+	color: #777777 !important;
+}
+
 a,
 a:visited {
   color: #f57c00;

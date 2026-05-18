@@ -16,6 +16,7 @@ import { GameService } from '../../../core/game/game.service';
   selector: 'app-game-detail-dialog',
   imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButton],
   templateUrl: './game-detail-dialog.html',
+  styleUrl: './game-detail-dialog.css',
 })
 export class GameDetailDialog {
   private gameService = inject(GameService);

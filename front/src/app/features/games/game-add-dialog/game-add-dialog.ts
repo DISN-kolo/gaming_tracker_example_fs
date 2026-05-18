@@ -28,6 +28,7 @@ import { GameService } from '../../../core/game/game.service';
     MatHint
   ],
   templateUrl: './game-add-dialog.html',
+  styleUrl: './game-add-dialog.css',
 })
 export class GameAddDialog {
   private dialogRef = inject(MatDialogRef<GameAddDialog>);
