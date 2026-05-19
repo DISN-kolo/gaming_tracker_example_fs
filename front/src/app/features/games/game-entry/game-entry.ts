@@ -5,10 +5,12 @@ import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 
 import { GameLibraryAddDialog } from '../game-library-add-dialog/game-library-add-dialog';
-import { GameLibraryEditDialog } from '../game-library-add-dialog/game-library-edit-dialog';
-import { GameLibraryDeleteDialog } from '../game-library-add-dialog/game-library-delete-dialog';
-import { GameCatalogEditDialog } from '../game-library-add-dialog/game-catalog-edit-dialog';
-import { GameCatalogDeleteDialog } from '../game-library-add-dialog/game-catalog-delete-dialog';
+import { GameLibraryEditDialog } from '../game-library-edit-dialog/game-library-edit-dialog';
+/*
+import { GameLibraryDeleteDialog } from '../game-library-delete-dialog/game-library-delete-dialog';
+import { GameCatalogEditDialog } from '../game-library-edit-dialog/game-catalog-edit-dialog';
+import { GameCatalogDeleteDialog } from '../game-library-delete-dialog/game-catalog-delete-dialog';
+*/
 import { GameDetailDialog } from '../game-detail-dialog/game-detail-dialog';
 
 @Component({
@@ -53,6 +55,7 @@ export class GameEntry {
   openLibraryEditDialog() {
     const dialogRef = this.dialog.open(GameLibraryEditDialog, {
       width: '420px',
+      // FIXME add stuff into the game OR better change the call to get the library entry specifically
       data: { gameId: this.game().id, status: this.game().status, rating: this.game().rating },
     });
     dialogRef.afterClosed().subscribe(result => {

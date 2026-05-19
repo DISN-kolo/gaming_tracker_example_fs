@@ -69,7 +69,7 @@ public class AuthService
 			.Where(u => u.Id == userId)
 			.Select(u => new MeResponse
 			{
-				Id = u.Id,
+				Id = userId,
 				Username = u.Name,
 				Email = u.Email,
 			})
