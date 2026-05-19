@@ -53,7 +53,7 @@ export class GameEntry {
   openLibraryEditDialog() {
     const dialogRef = this.dialog.open(GameLibraryEditDialog, {
       width: '420px',
-      data: this.game(),
+      data: { gameId: this.game().id, status: this.game().status, rating: this.game().rating },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -62,6 +62,7 @@ export class GameEntry {
     });
   }
 
+  /*
   openLibraryDeleteDialog() {
     const dialogRef = this.dialog.open(GameLibraryDeleteDialog, {
       width: '420px',
@@ -97,4 +98,5 @@ export class GameEntry {
       }
     });
   }
+ */
 }

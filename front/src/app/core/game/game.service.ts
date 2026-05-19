@@ -38,8 +38,7 @@ export class GameService {
   };
 
   editInLibrary(gameId: string, status: string, rating: number | null) {
-    // TODO
-    return this.http.post<void>(
+    return this.http.put<void>(
       `${environment.apiUrl}/api/games/${gameId}/library`,
       { status, rating }
     );

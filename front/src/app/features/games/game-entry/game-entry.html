@@ -14,9 +14,10 @@
 		<mat-menu #kebabMenu="matMenu">
 			<button mat-menu-item (click)="openLibraryAddDialog()" [disabled]="inLibrary()">Add to library</button>
 			<button mat-menu-item (click)="openLibraryEditDialog()" [disabled]="!inLibrary()">Edit library entry...</button>
-			<button mat-menu-item (click)="openLibraryDeleteDialog()" [disabled]="!inLibrary()">Remove from library</button>
+<!--			<button mat-menu-item (click)="openLibraryDeleteDialog()" [disabled]="!inLibrary()">Remove from library</button>
 			<button mat-menu-item (click)="openCatalogEditDialog()" [disabled]="!isOwner()">Edit entry...</button>
 			<button mat-menu-item (click)="openCatalogDeleteDialog()" [disabled]="!isOwner()">Delete entry</button>
+-->
 		</mat-menu>
 	</div>
 	@if (game().description) {

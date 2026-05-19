@@ -16,15 +16,17 @@ import { MatButton } from '@angular/material/button';
 
 import { GameService } from '../../../core/game/game.service';
 
-export const COMPLETION_STATUSES: { value: string; label: string }[] = [
+export const COMPLETION_STATUSES = [
   { value: 'PlanToPlay', label: 'Plan to Play' },
   { value: 'BoughtButNotPlayed', label: 'Bought But Not Played' },
   { value: 'Playing', label: 'Playing' },
   { value: 'Abandoned', label: 'Abandoned' },
   { value: 'Completed', label: 'Completed' },
-];
+] as const;
+// TODO check type again?
+export type CompletionStatusOption = typeof COMPLETION_STATUSES[number];
 
-function statusInList(statuses: { value: string }[]): ValidatorFn {
+export function statusInList(statuses: { value: string }[]): ValidatorFn {
   return (control: AbstractControl) => {
     const isValid = statuses.some(s => s.value === control.value);
     if (isValid) {

@@ -64,6 +64,18 @@ public class GamesController : ControllerBase
 		return NoContent();
 	}
 
+	[HttpPut("{id}/library")]
+	public async Task<IActionResult> UpdateLibraryEntry(Guid id, EditLibraryEntryRequest request)
+	{
+		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+		var success = await _gameService.UpdateLibraryEntryAsync(userId, id, request);
+		if (!success)
+		{
+			return NotFound();
+		}
+		return NoContent();
+	}
+
 	[HttpDelete("{id}/library")]
 	public async Task<IActionResult> RemoveFromLibrary(Guid id)
 	{

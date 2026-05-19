@@ -23,7 +23,7 @@ public class AuthService
 
 	public async Task<AuthResponse?> RegisterAsync(RegisterRequest request)
 	{
-		// TODO maybe something other than null? Lol
+		// XXX maybe something other than null? Lol
 		if (await _context.Users.AnyAsync(u => u.Email == request.Email))
 		{
 			return null;

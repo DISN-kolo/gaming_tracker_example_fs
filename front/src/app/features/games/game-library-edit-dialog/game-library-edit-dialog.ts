@@ -16,17 +16,7 @@ import { MatButton } from '@angular/material/button';
 
 import { GameService } from '../../../core/game/game.service';
 
-import { COMPLETION_STATUSES } from "../game-library-add-dialog/game-library-add-dialog";
-
-function statusInList(statuses: { value: string }[]): ValidatorFn {
-  return (control: AbstractControl) => {
-    const isValid = statuses.some(s => s.value === control.value);
-    if (isValid) {
-      return null;
-    }
-    return { invalidStatus: true };
-  };
-}
+import { COMPLETION_STATUSES, CompletionStatusOption, statusInList } from "../game-library-add-dialog/game-library-add-dialog";
 
 @Component({
   selector: 'app-game-library-edit-dialog',
@@ -48,13 +38,17 @@ function statusInList(statuses: { value: string }[]): ValidatorFn {
 export class GameLibraryEditDialog {
   private dialogRef = inject(MatDialogRef<GameLibraryEditDialog>);
   private gameService = inject(GameService);
-  private game: string = inject(MAT_DIALOG_DATA);
+  private gameData: {
+    gameId: string,
+    status: CompletionStatusOption,
+    rating: number | null
+  } = inject(MAT_DIALOG_DATA);
 
   statuses = COMPLETION_STATUSES;
 
   form = inject(FormBuilder).group({
-    status: ['', [Validators.required, statusInList(COMPLETION_STATUSES)]],
-    rating: [null as number | null, [Validators.min(1), Validators.max(10)]],
+    status: [this.gameData.status, [statusInList]],
+    rating: [this.gameData.rating, [Validators.min(1), Validators.max(10)]],
   });
 
   submit() {
@@ -69,5 +63,3 @@ export class GameLibraryEditDialog {
     });
   }
 }
-
-// TODO

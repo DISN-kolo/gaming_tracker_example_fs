@@ -26,7 +26,7 @@ public class GameService
 				SubmittedById = g.SubmittedById,
 			})
 			.ToListAsync();
-		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Debug purposes split of return and await
+		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Debug purposes split of return and select
 		return result;
 	}
 
@@ -90,15 +90,24 @@ public class GameService
 	public async Task<bool> AddToLibraryAsync(Guid userId, Guid gameId, CreateLibraryEntryRequest request)
 	{
 		var user = await _context.Users.FindAsync(userId);
-		if (user is null) return false;
+		if (user is null)
+		{
+			return false;
+		}
 
 		var game = await _context.Games.FindAsync(gameId);
-		if (game is null) return false;
+		if (game is null)
+		{
+			return false;
+		}
 
 		var existing = await _context.UserGameEntries
 			.FirstOrDefaultAsync(e => e.UserId == userId && e.GameId == gameId);
 
-		if (existing is not null) return true;
+		if (existing is not null)
+		{
+			return true;
+		}
 
 		_context.UserGameEntries.Add(new UserGameEntry
 		{
@@ -107,6 +116,23 @@ public class GameService
 			Status = request.Status,
 			Rating = request.Rating,
 		});
+		await _context.SaveChangesAsync();
+		return true;
+	}
+
+	public async Task<bool> UpdateLibraryEntryAsync(Guid userId, Guid gameId, EditLibraryEntryRequest request)
+	{
+		var entry = await _context.UserGameEntries
+			.FirstOrDefaultAsync(e => e.UserId == userId && e.GameId == gameId);
+
+		if (entry is null)
+		{
+			return false;
+		}
+
+		entry.Status = request.Status;
+		entry.Rating = request.Rating;
+
 		await _context.SaveChangesAsync();
 		return true;
 	}
