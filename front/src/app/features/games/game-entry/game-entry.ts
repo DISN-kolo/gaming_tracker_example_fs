@@ -5,6 +5,10 @@ import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 
 import { GameLibraryAddDialog } from '../game-library-add-dialog/game-library-add-dialog';
+import { GameLibraryEditDialog } from '../game-library-add-dialog/game-library-edit-dialog';
+import { GameLibraryDeleteDialog } from '../game-library-add-dialog/game-library-delete-dialog';
+import { GameCatalogEditDialog } from '../game-library-add-dialog/game-catalog-edit-dialog';
+import { GameCatalogDeleteDialog } from '../game-library-add-dialog/game-catalog-delete-dialog';
 import { GameDetailDialog } from '../game-detail-dialog/game-detail-dialog';
 
 @Component({
@@ -24,6 +28,7 @@ export class GameEntry {
     submittedById: string | null,
   }>();
   inLibrary = input.required<boolean>();
+  isOwner = input.required<boolean>();
   libraryChanged = output<void>();
 
   openDetailDialog() {
@@ -33,7 +38,7 @@ export class GameEntry {
     });
   }
 
-  openLibraryDialog() {
+  openLibraryAddDialog() {
     const dialogRef = this.dialog.open(GameLibraryAddDialog, {
       width: '420px',
       data: this.game().id,
@@ -41,6 +46,54 @@ export class GameEntry {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.libraryChanged.emit();
+      }
+    });
+  }
+
+  openLibraryEditDialog() {
+    const dialogRef = this.dialog.open(GameLibraryEditDialog, {
+      width: '420px',
+      data: this.game(),
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.libraryChanged.emit();
+      }
+    });
+  }
+
+  openLibraryDeleteDialog() {
+    const dialogRef = this.dialog.open(GameLibraryDeleteDialog, {
+      width: '420px',
+      data: this.game(),
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.libraryChanged.emit();
+      }
+    });
+  }
+
+  openCatalogEditDialog() {
+    const dialogRef = this.dialog.open(GameCatalogEditDialog, {
+      width: '420px',
+      data: this.game(),
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.libraryChanged.emit();
+      }
+    });
+  }
+
+  openCatalogDeleteDialog() {
+    const dialogRef = this.dialog.open(GameCatalogDeleteDialog, {
+      width: '420px',
+      data: this.game(),
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("Delete success");
       }
     });
   }

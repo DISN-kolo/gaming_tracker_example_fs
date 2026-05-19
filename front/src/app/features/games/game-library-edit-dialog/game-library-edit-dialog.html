@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Edit a library entry</h2>
+
+<mat-dialog-content>
+	<form [formGroup]="form" id="game-library-edit-form">
+		<mat-form-field appearance="outline">
+			<mat-label>Status</mat-label>
+			<mat-select formControlName="status">
+				@for (s of statuses; track s.value) {
+					<mat-option [value]="s.value">{{ s.label }}</mat-option>
+				}
+			</mat-select>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Rating (1–10)</mat-label>
+			<input matInput formControlName="rating" type="number" min="1" max="10" placeholder="Optional" />
+		</mat-form-field>
+	</form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close>Cancel</button>
+	<button mat-flat-button (click)="submit()" [disabled]="form.invalid">Add</button>
+</mat-dialog-actions>

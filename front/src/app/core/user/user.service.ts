@@ -8,6 +8,6 @@ export class UserService {
   private http = inject(HttpClient);
 
   me() {
-    return this.http.get<{ username: string, email: string }>(`${environment.apiUrl}/api/auth/me/`);
+    return this.http.get<{ id: string, username: string, email: string }>(`${environment.apiUrl}/api/auth/me/`);
   };
 };

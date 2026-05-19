@@ -36,6 +36,18 @@ export class GamesList {
     )
   );
 
+  ownedGameIds = computed(() => {
+    const userId = this.userinfo()?.id;
+    if (!userId) {
+      return new Set<string>();
+    }
+    return new Set(
+      this.games() ?? []
+      .filter(g => g.submittedById === userId)
+      .map(g => g.id)
+    )
+  });
+
   refreshGames() {
     this.refresh$.next();
   }

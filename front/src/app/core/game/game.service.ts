@@ -37,6 +37,14 @@ export class GameService {
     );
   };
 
+  editInLibrary(gameId: string, status: string, rating: number | null) {
+    // TODO
+    return this.http.post<void>(
+      `${environment.apiUrl}/api/games/${gameId}/library`,
+      { status, rating }
+    );
+  };
+
   createGame(title: string, releaseYear: number | null, description: string | null) {
     return this.http.post<{ id: string, title: string, releaseYear: number | null, description: string | null, submittedById: string | null }>(
       `${environment.apiUrl}/api/games`,
