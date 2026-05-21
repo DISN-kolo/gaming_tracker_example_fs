@@ -9,7 +9,7 @@
 
 		<mat-form-field appearance="outline">
 			<mat-label>Release year</mat-label>
-			<input matInput formControlName="releaseYear" type="number" placeholder="e.g. 2011" />
+			<input matInput formControlName="releaseYear" type="number" placeholder="e.g. 2011" (keydown)="preventNonInteger($event)" />
 		</mat-form-field>
 
 		<mat-form-field appearance="outline">

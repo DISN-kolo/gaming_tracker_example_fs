@@ -12,6 +12,7 @@ import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 
 import { GameService } from '../../../core/game/game.service';
+import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
 
 @Component({
   selector: 'app-game-add-dialog',
@@ -33,6 +34,8 @@ import { GameService } from '../../../core/game/game.service';
 export class GameAddDialog {
   private dialogRef = inject(MatDialogRef<GameAddDialog>);
   private gameService = inject(GameService);
+
+  protected readonly preventNonInteger = preventNonInteger;
 
   form = inject(FormBuilder).group({
     title: ['', [Validators.required, Validators.maxLength(200)]],

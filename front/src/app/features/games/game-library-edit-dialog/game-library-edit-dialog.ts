@@ -17,6 +17,7 @@ import { MatButton } from '@angular/material/button';
 import { GameService } from '../../../core/game/game.service';
 
 import { COMPLETION_STATUSES, CompletionStatus, statusInList } from '../../../shared/models/completion-status';
+import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
 
 @Component({
   selector: 'app-game-library-edit-dialog',
@@ -46,6 +47,7 @@ export class GameLibraryEditDialog {
   } = inject(MAT_DIALOG_DATA);
 
   statuses = COMPLETION_STATUSES;
+  protected readonly preventNonInteger = preventNonInteger;
 
   form = inject(FormBuilder).group({
     status: [this.gameData.status, [statusInList(COMPLETION_STATUSES)]],
