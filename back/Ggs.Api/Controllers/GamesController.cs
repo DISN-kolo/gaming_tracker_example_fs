@@ -52,6 +52,18 @@ public class GamesController : ControllerBase
 		return CreatedAtAction(nameof(GetById), new { id = game.Id }, game);
 	}
 
+	[HttpGet("{id}/library")]
+	public async Task<IActionResult> GetLibraryEntry(Guid id)
+	{
+		var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+		var libEntry = await _gameService.GetLibraryEntryAsync(userId, id);
+		if (libEntry is null)
+		{
+			return NotFound();
+		}
+		return Ok(libEntry);
+	}
+
 	[HttpPost("{id}/library")]
 	public async Task<IActionResult> AddToLibrary(Guid id, CreateLibraryEntryRequest request)
 	{
