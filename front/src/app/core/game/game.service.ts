@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CompletionStatus } from '../../shared/models/completion-status';
 
 import { environment } from '../../../environments/environment';
 
@@ -28,6 +29,18 @@ export class GameService {
     return this.http.get<{ averageRating: number | null }>(
       `${environment.apiUrl}/api/games/${id}/avgrating`
     );
+  };
+
+  getByIdFromLibrary(id: string) {
+    return this.http.get<{
+      id: string,
+      title: string,
+      releaseYear: number | null,
+      description: string | null,
+      submittedById: string | null,
+      completionStatus: CompletionStatus | null,
+      rating: number | null,
+    }>(`${environment.apiUrl}/api/games/${id}/library`);
   };
 
   addToLibrary(gameId: string, status: string, rating: number | null) {

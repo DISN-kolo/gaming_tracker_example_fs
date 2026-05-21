@@ -16,7 +16,7 @@ import { MatButton } from '@angular/material/button';
 
 import { GameService } from '../../../core/game/game.service';
 
-import { COMPLETION_STATUSES, CompletionStatusOption, statusInList } from "../game-library-add-dialog/game-library-add-dialog";
+import { COMPLETION_STATUSES, CompletionStatus, statusInList } from '../../../shared/models/completion-status';
 
 @Component({
   selector: 'app-game-library-edit-dialog',
@@ -40,7 +40,7 @@ export class GameLibraryEditDialog {
   private gameService = inject(GameService);
   private gameData: {
     gameId: string,
-    status: CompletionStatusOption,
+    status: CompletionStatus,
     rating: number | null
   } = inject(MAT_DIALOG_DATA);
 
