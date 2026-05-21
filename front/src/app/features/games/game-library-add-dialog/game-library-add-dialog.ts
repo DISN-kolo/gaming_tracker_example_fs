@@ -33,6 +33,7 @@ import { COMPLETION_STATUSES, CompletionStatus, statusInList } from '../../../sh
     MatButton,
   ],
   templateUrl: './game-library-add-dialog.html',
+  styleUrl: './game-library-add-dialog.css',
 })
 export class GameLibraryAddDialog {
   private dialogRef = inject(MatDialogRef<GameLibraryAddDialog>);

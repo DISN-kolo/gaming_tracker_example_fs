@@ -26,6 +26,10 @@
   background-color: #ff8f00 !important;
 }
 
+.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
+  color: #e0e0e0 !important;
+}
+
 .mat-mdc-form-field-hint {
 	color: #bbbbbb;
  }
