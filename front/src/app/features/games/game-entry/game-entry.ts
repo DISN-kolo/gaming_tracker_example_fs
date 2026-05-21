@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { GameLibraryAddDialog } from '../game-library-add-dialog/game-library-add-dialog';
 import { GameLibraryEditDialog } from '../game-library-edit-dialog/game-library-edit-dialog';
+import { CompletionStatus } from '../../../shared/models/completion-status';
 /*
 import { GameLibraryDeleteDialog } from '../game-library-delete-dialog/game-library-delete-dialog';
 import { GameCatalogEditDialog } from '../game-library-edit-dialog/game-catalog-edit-dialog';
@@ -30,6 +31,7 @@ export class GameEntry {
     submittedById: string | null,
   }>();
   inLibrary = input.required<boolean>();
+  libEntry = input<{ status: CompletionStatus, rating: number | null }>();
   isOwner = input.required<boolean>();
   libraryChanged = output<void>();
 
@@ -53,10 +55,13 @@ export class GameEntry {
   }
 
   openLibraryEditDialog() {
+    const entry = this.libEntry();
+    if (!entry) {
+      return ;
+    }
     const dialogRef = this.dialog.open(GameLibraryEditDialog, {
       width: '420px',
-      // FIXME add stuff into the game OR better change the call to get the library entry specifically
-      data: { gameId: this.game().id, status: this.game().status, rating: this.game().rating },
+      data: { gameId: this.game().id, status: entry.status, rating: entry.rating },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

@@ -15,7 +15,7 @@ import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 
 import { GameService } from '../../../core/game/game.service';
-import { COMPLETION_STATUSES, statusInList } from '../../../shared/models/completion-status';
+import { COMPLETION_STATUSES, CompletionStatus, statusInList } from '../../../shared/models/completion-status';
 
 @Component({
   selector: 'app-game-library-add-dialog',
@@ -42,7 +42,7 @@ export class GameLibraryAddDialog {
   statuses = COMPLETION_STATUSES;
 
   form = inject(FormBuilder).group({
-    status: ['', [Validators.required, statusInList(COMPLETION_STATUSES)]],
+    status: [null as CompletionStatus | null, [Validators.required, statusInList(COMPLETION_STATUSES)]],
     rating: [null as number | null, [Validators.min(1), Validators.max(10)]],
   });
 

@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, map, switchMap } from 'rxjs';
 
 import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
+import { CompletionStatus } from '../../../shared/models/completion-status';
 
 import { GameEntry } from '../game-entry/game-entry';
 import { GameNewEntry } from '../game-new-entry/game-new-entry';
@@ -29,10 +30,10 @@ export class GamesList {
     )
   );
 
-  libraryIds = toSignal(
+  libraryEntries = toSignal(
     this.refresh$.pipe(
       switchMap(() => this.gameService.getLibrary()),
-      map(entries => new Set(entries.map(e => e.id)))
+      map(entries => new Map(entries.map(e => [e.id, { status: e.status as CompletionStatus, rating: e.rating }])))
     )
   );
 
@@ -41,8 +42,9 @@ export class GamesList {
     if (!userId) {
       return new Set<string>();
     }
+    const games = this.games() ?? [];
     return new Set(
-      this.games() ?? []
+      games
       .filter(g => g.submittedById === userId)
       .map(g => g.id)
     )

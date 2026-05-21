@@ -47,7 +47,7 @@ export class GameLibraryEditDialog {
   statuses = COMPLETION_STATUSES;
 
   form = inject(FormBuilder).group({
-    status: [this.gameData.status, [statusInList]],
+    status: [this.gameData.status, [statusInList(COMPLETION_STATUSES)]],
     rating: [this.gameData.rating, [Validators.min(1), Validators.max(10)]],
   });
 
@@ -57,7 +57,7 @@ export class GameLibraryEditDialog {
       return ;
     }
     const { status, rating } = this.form.value;
-    this.gameService.editInLibrary(this.gameId, status!, rating ?? null).subscribe({
+    this.gameService.editInLibrary(this.gameData.gameId, status!, rating ?? null).subscribe({
       next: () => this.dialogRef.close(true),
       error: (err) => console.error(err),
     });

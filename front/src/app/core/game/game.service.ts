@@ -9,10 +9,24 @@ export class GameService {
   private http = inject(HttpClient);
 
   getLibrary() {
-    return this.http.get<{ id: string, title: string, releaseYear: number | null, description: string | null, submittedById: string | null }[]>(`${environment.apiUrl}/api/games/library`);
+    return this.http.get<{
+      id: string,
+      title: string,
+      releaseYear: number | null,
+      description: string | null,
+      submittedById: string | null,
+      status: CompletionStatus,
+      rating: number | null,
+    }[]>(`${environment.apiUrl}/api/games/library`);
   };
   getGames() {
-    return this.http.get<{ id: string, title: string, releaseYear: number | null, description: string | null, submittedById: string | null }[]>(`${environment.apiUrl}/api/games`);
+    return this.http.get<{
+      id: string,
+      title: string,
+      releaseYear: number | null,
+      description: string | null,
+      submittedById: string | null,
+    }[]>(`${environment.apiUrl}/api/games`);
   };
 
   getById(id: string) {
@@ -43,14 +57,14 @@ export class GameService {
     }>(`${environment.apiUrl}/api/games/${id}/library`);
   };
 
-  addToLibrary(gameId: string, status: string, rating: number | null) {
+  addToLibrary(gameId: string, status: CompletionStatus, rating: number | null) {
     return this.http.post<void>(
       `${environment.apiUrl}/api/games/${gameId}/library`,
       { status, rating }
     );
   };
 
-  editInLibrary(gameId: string, status: string, rating: number | null) {
+  editInLibrary(gameId: string, status: CompletionStatus, rating: number | null) {
     return this.http.put<void>(
       `${environment.apiUrl}/api/games/${gameId}/library`,
       { status, rating }
