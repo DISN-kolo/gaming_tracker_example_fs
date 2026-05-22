@@ -87,22 +87,21 @@ public class GameService
 		};
 	}
 
-	public async Task<LibraryEntryResponse> GetLibraryEntryAsync(Guid userId, Guid gameId)
+	public async Task<LibraryEntryResponse?> GetLibraryEntryAsync(Guid userId, Guid gameId)
 	{
-		var entry = await _context.UserGameEntries
-			.FirstOrDefaultAsync(e => e.UserId == userId && e.GameId == gameId);
-		var response = new LibraryEntryResponse
-		{
-			Id = entry.Game.Id,
-			Title = entry.Game.Title,
-			ReleaseYear = entry.Game.ReleaseYear,
-			Description = entry.Game.Description,
-			SubmittedById = entry.Game.SubmittedById,
-			Status = entry.Status,
-			Rating = entry.Rating,
-		};
-
-		return (response);
+		return await _context.UserGameEntries
+			.Where(e => e.UserId == userId && e.GameId == gameId)
+			.Select(e => new LibraryEntryResponse
+			{
+				Id = e.Game.Id,
+				Title = e.Game.Title,
+				ReleaseYear = e.Game.ReleaseYear,
+				Description = e.Game.Description,
+				SubmittedById = e.Game.SubmittedById,
+				Status = e.Status,
+				Rating = e.Rating,
+			})
+			.FirstOrDefaultAsync();
 	}
 
 	public async Task<bool> AddToLibraryAsync(Guid userId, Guid gameId, CreateLibraryEntryRequest request)

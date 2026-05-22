@@ -1,13 +1,23 @@
-<h2 mat-dialog-title>
+<div mat-dialog-title class="dialog-title">
 	@if (detail() === undefined) {
-		Loading...
+		<span>Loading...</span>
 	} @else {
-		{{ detail()!.game.title }}
-		@if (detail()!.game.releaseYear) {
-			({{ detail()!.game.releaseYear }})
-		}
+		<span class="dialog-title__text">
+			{{ detail()!.game.title }}
+			@if (detail()!.game.releaseYear) {
+				({{ detail()!.game.releaseYear }})
+			}
+		</span>
+		<span class="spacer"></span>
+		<app-game-kebab-menu
+			[gameId]="detail()!.game.id"
+			[inLibrary]="inLibrary()"
+			[isOwner]="false"
+			[libEntry]="libEntry()"
+			(libraryChanged)="onLibraryChanged()"
+		/>
 	}
-</h2>
+</div>
 
 <mat-dialog-content>
 	@if (detail() !== undefined) {
