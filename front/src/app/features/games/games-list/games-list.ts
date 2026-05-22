@@ -26,7 +26,8 @@ export class GamesList {
   private refresh$ = new BehaviorSubject<void>(undefined);
   games = toSignal(
     this.refresh$.pipe(
-      switchMap(() => this.gameService.getGames())
+      switchMap(() => this.gameService.getGames()),
+      map(games => [...games].reverse())
     )
   );
 
