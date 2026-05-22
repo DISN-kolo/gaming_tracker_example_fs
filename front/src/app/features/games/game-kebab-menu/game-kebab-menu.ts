@@ -17,6 +17,7 @@ import { CompletionStatus } from '../../../shared/models/completion-status';
   selector: 'app-game-kebab-menu',
   imports: [MatIconButton, MatIcon, MatMenu, MatMenuTrigger, MatMenuItem],
   templateUrl: './game-kebab-menu.html',
+  styleUrl: './game-kebab-menu.css',
 })
 export class GameKebabMenu {
   private dialog = inject(MatDialog);
