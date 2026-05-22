@@ -2,3 +2,9 @@ mat-dialog-content p {
 	font-size: 1.05rem;
 	color: #ececec;
 }
+
+mat-dialog-content p.description {
+	word-break: break-word;
+	overflow-wrap: break-word;
+	white-space: pre-wrap;
+}

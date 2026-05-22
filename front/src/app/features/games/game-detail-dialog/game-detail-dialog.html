@@ -12,7 +12,7 @@
 <mat-dialog-content>
 	@if (detail() !== undefined) {
 		@if (detail()!.game.description) {
-			<p>{{ detail()!.game.description }}</p>
+			<p class="description">{{ detail()!.game.description }}</p>
 		} @else {
 			<p>No description.</p>
 		}
