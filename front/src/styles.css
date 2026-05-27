@@ -46,7 +46,9 @@
 
 .cdk-overlay-pane {
 	width: 50% !important;
+	max-height: 80vh !important;
 	margin-top: 10vh;
+	overflow: hidden;
 }
 
 a,
