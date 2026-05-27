@@ -40,12 +40,13 @@
 	color: #777777 !important;
 }
 
-.cdk-overlay-pane {
-	width: 100%;
+.cdk-global-overlay-wrapper {
+	align-items: flex-start !important;
 }
 
-.mat-mdc-dialog-container {
-	margin: 10% 20% 30% 20%;
+.cdk-overlay-pane {
+	width: 50% !important;
+	margin-top: 10vh;
 }
 
 a,
