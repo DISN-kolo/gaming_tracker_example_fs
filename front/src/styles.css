@@ -12,6 +12,7 @@
 	--mat-sys-motion-duration-short1: 0.08s;
 	--mat-sys-motion-duration-short2: 0.08s;
 	--mdc-outlined-text-field-input-text-color: #e0e0e0;
+	--mat-dialog-container-max-width: 100%;
 }
 
 .mdc-floating-label {
@@ -37,6 +38,14 @@
 .mat-mdc-input-element::placeholder,
 .mdc-text-field__input::placeholder {
 	color: #777777 !important;
+}
+
+.cdk-overlay-pane {
+	width: 100%;
+}
+
+.mat-mdc-dialog-container {
+	margin: 10% 20% 30% 20%;
 }
 
 a,

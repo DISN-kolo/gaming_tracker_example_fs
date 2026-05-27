@@ -15,7 +15,7 @@ export class GameNewEntry {
   gameAdded = output<void>();
 
   openDialog() {
-    const dialogRef = this.dialog.open(GameAddDialog, { width: '420px' });
+    const dialogRef = this.dialog.open(GameAddDialog);
     dialogRef.afterClosed().subscribe((created: boolean) => {
       if (created) {
         this.gameAdded.emit();

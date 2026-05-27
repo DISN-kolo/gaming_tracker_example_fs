@@ -28,7 +28,6 @@ export class GameEntry {
 
   openDetailDialog() {
     this.dialog.open(GameDetailDialog, {
-      width: '480px',
       data: { gameId: this.game().id, onLibraryChanged: () => this.libraryChanged.emit() },
     });
   }

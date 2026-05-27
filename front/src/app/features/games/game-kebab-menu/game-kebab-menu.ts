@@ -30,7 +30,6 @@ export class GameKebabMenu {
 
   openLibraryAddDialog() {
     const dialogRef = this.dialog.open(GameLibraryAddDialog, {
-      width: '420px',
       data: this.gameId(),
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -46,7 +45,6 @@ export class GameKebabMenu {
       return ;
     }
     const dialogRef = this.dialog.open(GameLibraryEditDialog, {
-      width: '420px',
       data: { gameId: this.gameId(), status: entry.status, rating: entry.rating },
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -59,7 +57,6 @@ export class GameKebabMenu {
   /*
   openLibraryDeleteDialog() {
     const dialogRef = this.dialog.open(GameLibraryDeleteDialog, {
-      width: '420px',
       data: this.gameId(),
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -71,7 +68,6 @@ export class GameKebabMenu {
 
   openCatalogEditDialog() {
     const dialogRef = this.dialog.open(GameCatalogEditDialog, {
-      width: '420px',
       data: this.gameId(),
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -83,7 +79,6 @@ export class GameKebabMenu {
 
   openCatalogDeleteDialog() {
     const dialogRef = this.dialog.open(GameCatalogDeleteDialog, {
-      width: '420px',
       data: this.gameId(),
     });
     dialogRef.afterClosed().subscribe(result => {
