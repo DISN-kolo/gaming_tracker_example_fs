@@ -1,46 +1,50 @@
 nav {
-  display: flex;
-  align-items: center;
-  padding: 0 1.5rem;
-  height: 56px;
-  background-color: #313131;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
+	display: flex;
+	align-items: center;
+	padding: 0 1.5rem;
+	height: 56px;
+	background-color: #313131;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
 }
 
 nav a {
-  color: #e0e0e0;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  transition: color 0.08s ease;
+	color: #e0e0e0;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 0.4rem 0.75rem;
+	border-radius: 6px;
+	transition: color 0.08s ease;
 }
 
 nav a:hover {
-  color: #f57c00;
+	color: #f57c00;
+}
+
+nav a.active {
+	color: #f57c00;
 }
 
 .spacer {
-  flex: 1;
+	flex: 1;
 }
 
 button {
-  background: none;
-  border: 1px solid #e53935;
-  color: #e53935;
-  padding: 0.4rem 0.9rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.08s ease, color 0.08s ease;
+	background: none;
+	border: 1px solid #e53935;
+	color: #e53935;
+	padding: 0.4rem 0.9rem;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	transition: background-color 0.08s ease, color 0.08s ease;
 }
 
 button:hover {
-  background-color: #e53935;
-  color: #e0e0e0;
+	background-color: #e53935;
+	color: #e0e0e0;
 }

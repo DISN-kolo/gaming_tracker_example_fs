@@ -1,33 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --mat-sys-primary: #f57c00;
-  --mat-sys-on-primary: #ffffff;
-  --mat-sys-surface: #3a3a3a;
-  --mat-sys-on-surface: #e0e0e0;
-  --mat-sys-surface-container: #444444;
-  --mat-sys-outline: #777777;
-  --mat-card-elevated-container-color: #3a3a3a;
-  --mat-form-field-container-text-color: #e0e0e0;
-  --mat-sys-motion-duration-short1: 0.08s;
-  --mat-sys-motion-duration-short2: 0.08s;
-  --mdc-outlined-text-field-input-text-color: #e0e0e0;
+	--mat-sys-primary: #f57c00;
+	--mat-sys-on-primary: #ffffff;
+	--mat-sys-surface: #3a3a3a;
+	--mat-sys-on-surface: #e0e0e0;
+	--mat-sys-surface-container: #444444;
+	--mat-sys-outline: #777777;
+	--mat-card-elevated-container-color: #3a3a3a;
+	--mat-form-field-container-text-color: #e0e0e0;
+	--mat-sys-motion-duration-short1: 0.08s;
+	--mat-sys-motion-duration-short2: 0.08s;
+	--mdc-outlined-text-field-input-text-color: #e0e0e0;
 }
 
 .mdc-floating-label {
-  color: #bbbbbb !important;
+	color: #bbbbbb !important;
 }
 
 .mat-mdc-unelevated-button {
-  transition: background-color 0.08s ease !important;
+	transition: background-color 0.08s ease !important;
 }
 
 .mat-mdc-unelevated-button:hover {
-  background-color: #ff8f00 !important;
+	background-color: #ff8f00 !important;
 }
 
 .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
-  color: #e0e0e0 !important;
+	color: #e0e0e0 !important;
 }
 
 .mat-mdc-form-field-hint {
@@ -41,48 +41,48 @@
 
 a,
 a:visited {
-  color: #f57c00;
-  transition: color 0.08s ease;
+	color: #f57c00;
+	transition: color 0.08s ease;
 }
 
 a:hover {
-  color: #ffab40;
+	color: #ffab40;
 }
 
 a:active {
-  color: #ffffff;
+	color: #ffffff;
 }
 
 body {
-  background-color: #2a2a2a;
-  color: #e0e0e0;
-  margin: 0;
-  padding-top: 56px;
+	background-color: #2a2a2a;
+	color: #e0e0e0;
+	margin: 0;
+	padding-top: 56px;
 }
 
 .page-center {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding-top: 20vh;
-  box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	min-height: 100vh;
+	padding-top: 20vh;
+	box-sizing: border-box;
 }
 
 .auth-card {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 360px;
-  padding: 32px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 360px;
+	padding: 32px;
 }
 
 .auth-card form {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .auth-hint {
-  margin-top: 24px;
-  text-align: center;
+	margin-top: 24px;
+	text-align: center;
 }
