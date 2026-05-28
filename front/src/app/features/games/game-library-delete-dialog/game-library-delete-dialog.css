@@ -1,0 +1,13 @@
+.confirm-deletion {
+	background-color: #e62828 !important;
+	color: #e0e0e0 !important;
+}
+
+.confirm-deletion:hover {
+	background-color: #e53935 !important;
+}
+
+mat-dialog-content p {
+	font-size: 1.05rem;
+	color: #ececec;
+}

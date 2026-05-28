@@ -6,8 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { GameLibraryAddDialog } from '../game-library-add-dialog/game-library-add-dialog';
 import { GameLibraryEditDialog } from '../game-library-edit-dialog/game-library-edit-dialog';
-/*
 import { GameLibraryDeleteDialog } from '../game-library-delete-dialog/game-library-delete-dialog';
+/*
 import { GameCatalogEditDialog } from '../game-catalog-edit-dialog/game-catalog-edit-dialog';
 import { GameCatalogDeleteDialog } from '../game-catalog-delete-dialog/game-catalog-delete-dialog';
 */
@@ -54,10 +54,11 @@ export class GameKebabMenu {
     });
   }
 
-  /*
   openLibraryDeleteDialog() {
     const dialogRef = this.dialog.open(GameLibraryDeleteDialog, {
-      data: this.gameId(),
+      data: {
+        message: "Are you sure you want to delete this game from your library? It will still be available to add later."
+      },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -66,6 +67,7 @@ export class GameKebabMenu {
     });
   }
 
+  /*
   openCatalogEditDialog() {
     const dialogRef = this.dialog.open(GameCatalogEditDialog, {
       data: this.gameId(),
