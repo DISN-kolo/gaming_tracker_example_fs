@@ -40,11 +40,11 @@
 	color: #777777 !important;
 }
 
-.cdk-global-overlay-wrapper {
+.cdk-global-overlay-wrapper:has(.mat-mdc-dialog-panel) {
 	align-items: flex-start !important;
 }
 
-.cdk-overlay-pane {
+.cdk-overlay-pane.mat-mdc-dialog-panel {
 	width: 50% !important;
 	max-height: 80vh !important;
 	margin-top: 10vh;
