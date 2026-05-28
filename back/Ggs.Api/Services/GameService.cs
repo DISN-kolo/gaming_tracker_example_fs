@@ -26,7 +26,7 @@ public class GameService
 				SubmittedById = g.SubmittedById,
 			})
 			.ToListAsync();
-		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Debug purposes split of return and select
+		// Debug purposes split of return and select
 		return result;
 	}
 
@@ -159,7 +159,10 @@ public class GameService
 		var entry = await _context.UserGameEntries
 			.FirstOrDefaultAsync(e => e.UserId == userId && e.GameId == gameId);
 
-		if (entry is null) return false;
+		if (entry is null)
+		{
+			return false;
+		}
 
 		_context.UserGameEntries.Remove(entry);
 		await _context.SaveChangesAsync();

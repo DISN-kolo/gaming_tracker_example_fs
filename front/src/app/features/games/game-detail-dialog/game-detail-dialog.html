@@ -1,3 +1,6 @@
+@if (inLibrary()) {
+	<span class="game-detail__library-badge">In Library</span>
+}
 <div mat-dialog-title class="dialog-title">
 	@if (detail() === undefined) {
 		<span>Loading...</span>

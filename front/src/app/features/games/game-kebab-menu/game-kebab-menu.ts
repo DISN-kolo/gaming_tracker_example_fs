@@ -57,6 +57,7 @@ export class GameKebabMenu {
   openLibraryDeleteDialog() {
     const dialogRef = this.dialog.open(GameLibraryDeleteDialog, {
       data: {
+        gameId: this.gameId(),
         message: "Are you sure you want to delete this game from your library? It will still be available to add later."
       },
     });

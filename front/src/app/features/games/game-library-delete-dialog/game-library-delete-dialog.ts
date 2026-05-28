@@ -24,6 +24,14 @@ import { GameService } from '../../../core/game/game.service';
   styleUrl: './game-library-delete-dialog.css',
 })
 export class GameLibraryDeleteDialog {
-  data = inject<{ message: string }>(MAT_DIALOG_DATA);
+  private dialogRef = inject(MatDialogRef<GameLibraryDeleteDialog>);
+  data = inject<{ gameId: string, message: string }>(MAT_DIALOG_DATA);
   private gameService = inject(GameService);
+
+  confirmDelete() {
+    this.gameService.removeFromLibrary(this.data.gameId).subscribe({
+      next: () => this.dialogRef.close(true),
+      error: (err) => console.error(err),
+    });
+  }
 }

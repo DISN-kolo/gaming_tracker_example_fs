@@ -71,6 +71,12 @@ export class GameService {
     );
   };
 
+  removeFromLibrary(gameId: string) {
+    return this.http.delete<void>(
+      `${environment.apiUrl}/api/games/${gameId}/library`
+    );
+  };
+
   createGame(title: string, releaseYear: number | null, description: string | null) {
     return this.http.post<{ id: string, title: string, releaseYear: number | null, description: string | null, submittedById: string | null }>(
       `${environment.apiUrl}/api/games`,

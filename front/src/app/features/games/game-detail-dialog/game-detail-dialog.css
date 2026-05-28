@@ -18,3 +18,12 @@ mat-dialog-content p.description {
 	overflow-wrap: break-word;
 	white-space: pre-wrap;
 }
+
+.game-detail__library-badge {
+	position: absolute;
+	top: 0.4rem;
+	left: 1.5rem;
+	font-size: 0.8rem;
+	font-style: italic;
+	color: #aaaaaa;
+}
