@@ -15,7 +15,7 @@
 		<app-game-kebab-menu
 			[gameId]="detail()!.game.id"
 			[inLibrary]="inLibrary()"
-			[isOwner]="false"
+			[isOwner]="isOwner"
 			[libEntry]="libEntry()"
 			(libraryChanged)="onLibraryChanged()"
 		/>

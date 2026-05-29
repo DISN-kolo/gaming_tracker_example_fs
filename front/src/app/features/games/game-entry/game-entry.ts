@@ -28,7 +28,7 @@ export class GameEntry {
 
   openDetailDialog() {
     this.dialog.open(GameDetailDialog, {
-      data: { gameId: this.game().id, onLibraryChanged: () => this.libraryChanged.emit() },
+      data: { isOwner: this.isOwner(), gameId: this.game().id, onLibraryChanged: () => this.libraryChanged.emit() },
     });
   }
 }

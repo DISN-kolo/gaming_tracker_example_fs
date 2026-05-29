@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, catchError, forkJoin, of, switchMap } from 'rxjs';
 import {
@@ -22,7 +22,8 @@ import { CompletionStatus } from '../../../shared/models/completion-status';
 })
 export class GameDetailDialog {
   private gameService = inject(GameService);
-  private dialogData: { gameId: string, onLibraryChanged: () => void } = inject(MAT_DIALOG_DATA);
+  private dialogData: { isOwner: boolean, gameId: string, onLibraryChanged: () => void } = inject(MAT_DIALOG_DATA);
+  public isOwner = this.dialogData.isOwner;
 
   private refresh$ = new BehaviorSubject<void>(undefined);
 
