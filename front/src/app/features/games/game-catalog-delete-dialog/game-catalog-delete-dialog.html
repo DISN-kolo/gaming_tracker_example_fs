@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>Delete?</h2>
+<mat-dialog-content><p>{{ data.message }}</p></mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-flat-button class="confirm-deletion" [mat-dialog-close]="true" (click)="confirmDelete()">Yes, delete</button>
+	<button mat-button [mat-dialog-close]="false" cdkFocusInitial>No, keep</button>
+</mat-dialog-actions>

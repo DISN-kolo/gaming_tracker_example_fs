@@ -9,8 +9,8 @@ import { GameLibraryEditDialog } from '../game-library-edit-dialog/game-library-
 import { GameLibraryDeleteDialog } from '../game-library-delete-dialog/game-library-delete-dialog';
 /*
 import { GameCatalogEditDialog } from '../game-catalog-edit-dialog/game-catalog-edit-dialog';
-import { GameCatalogDeleteDialog } from '../game-catalog-delete-dialog/game-catalog-delete-dialog';
 */
+import { GameCatalogDeleteDialog } from '../game-catalog-delete-dialog/game-catalog-delete-dialog';
 import { CompletionStatus } from '../../../shared/models/completion-status';
 
 @Component({
@@ -79,10 +79,14 @@ export class GameKebabMenu {
       }
     });
   }
+  */
 
   openCatalogDeleteDialog() {
     const dialogRef = this.dialog.open(GameCatalogDeleteDialog, {
-      data: this.gameId(),
+      data: {
+        gameId: this.gameId(),
+        message: "Are you sure you want to entirely delete this game from the website? THIS ACTION CANNOT BE UNDONE."
+      },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -90,5 +94,4 @@ export class GameKebabMenu {
       }
     });
   }
-  */
 }

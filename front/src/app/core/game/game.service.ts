@@ -83,4 +83,11 @@ export class GameService {
       { title, releaseYear, description }
     );
   };
+
+  removeFromCatalog(gameId: string) {
+    return this.http.delete<void>(
+      `${environment.apiUrl}/api/games/${gameId}`
+    );
+  };
+
 };
