@@ -27,6 +27,7 @@ export class GameKebabMenu {
   isOwner = input.required<boolean>();
   libEntry = input<{ status: CompletionStatus, rating: number | null }>();
   libraryChanged = output<void>();
+  catalogDeletionHappened = output<void>();
 
   openLibraryAddDialog() {
     const dialogRef = this.dialog.open(GameLibraryAddDialog, {
@@ -90,7 +91,7 @@ export class GameKebabMenu {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.libraryChanged.emit();
+        this.catalogDeletionHappened.emit();
       }
     });
   }

@@ -7,6 +7,7 @@ import {
   MatDialogContent,
   MatDialogActions,
   MatDialogClose,
+  MatDialogRef
 } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 
@@ -21,6 +22,7 @@ import { CompletionStatus } from '../../../shared/models/completion-status';
   styleUrl: './game-detail-dialog.css',
 })
 export class GameDetailDialog {
+  private dialogRef = inject(MatDialogRef<GameDetailDialog>);
   private gameService = inject(GameService);
   private dialogData: { isOwner: boolean, gameId: string, onLibraryChanged: () => void } = inject(MAT_DIALOG_DATA);
   public isOwner = this.dialogData.isOwner;
@@ -55,5 +57,10 @@ export class GameDetailDialog {
   onLibraryChanged() {
     this.refresh$.next();
     this.dialogData.onLibraryChanged();
+  }
+
+  onCatalogDeletionHappened() {
+    this.dialogData.onLibraryChanged();
+    this.dialogRef.close();
   }
 }
