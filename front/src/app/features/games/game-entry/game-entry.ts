@@ -13,6 +13,7 @@ import { CompletionStatus } from '../../../shared/models/completion-status';
 })
 export class GameEntry {
   private dialog = inject(MatDialog);
+  catalogDeletionHappened = output<void>();
 
   game = input.required<{
     id: string,
@@ -30,5 +31,9 @@ export class GameEntry {
     this.dialog.open(GameDetailDialog, {
       data: { isOwner: this.isOwner(), gameId: this.game().id, onLibraryChanged: () => this.libraryChanged.emit() },
     });
+  }
+
+  onCatalogDeletionHappened() {
+    this.libraryChanged.emit();
   }
 }
