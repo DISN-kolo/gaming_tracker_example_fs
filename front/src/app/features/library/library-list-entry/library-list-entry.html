@@ -1,20 +1,20 @@
 <div class="library-list-entry" (click)="openDetailDialog()">
 	<div class="library-list-entry__header">
-		<span class="library-list-entry__title">{{ libraryElement().title }}</span>
-		@if (libraryElement().releaseYear) {
-			<span class="library-list-entry__year">({{ libraryElement().releaseYear }})</span>
+		<span class="library-list-entry__title">{{ libraryEntry().title }}</span>
+		@if (libraryEntry().releaseYear) {
+			<span class="library-list-entry__year">({{ libraryEntry().releaseYear }})</span>
 		}
 		<span class="spacer"></span>
 		<app-game-kebab-menu
-			[gameId]="libraryElement().id"
+			[gameId]="libraryEntry().id"
 			[inLibrary]="true"
 			[isOwner]="isOwner()"
-			[libEntry]="{ status: libraryElement().status, rating: libraryElement().rating }"
+			[libEntry]="{ status: libraryEntry().status, rating: libraryEntry().rating }"
 			(libraryChanged)="libraryChanged.emit()"
 			(catalogDeletionHappened) = "onCatalogDeletionHappened()"
 		/>
 	</div>
-	@if (libraryElement().description) {
-		<p class="library-list-entry__description">{{ libraryElement().description }}</p>
+	@if (libraryEntry().description) {
+		<p class="library-list-entry__description">{{ libraryEntry().description }}</p>
 	}
 </div>

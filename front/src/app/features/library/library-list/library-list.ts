@@ -27,7 +27,8 @@ export class LibraryList {
 
   libraryEntries = toSignal(
     this.refresh$.pipe(
-      switchMap(() => this.gameService.getLibrary()),
+      switchMap(() => this.gameService.getLibrary())
+      /*
       map(entries => new Map(entries.map(e => [e.id, {
         id: e.id,
         title: e.title,
@@ -37,6 +38,7 @@ export class LibraryList {
         status: e.status as CompletionStatus,
         rating: e.rating,
       }])))
+      */
     )
   );
 

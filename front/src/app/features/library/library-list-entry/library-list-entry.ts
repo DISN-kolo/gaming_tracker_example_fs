@@ -1,5 +1,8 @@
 import { Component, inject, input, output, computed } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { toSignal } from '@angular/core/rxjs-interop';
+
+import { UserService } from '../../../core/user/user.service';
 
 import { GameKebabMenu } from '../../../shared/components/game-kebab-menu/game-kebab-menu';
 import { LibraryDetailDialog } from '../library-detail-dialog/library-detail-dialog';
@@ -13,9 +16,11 @@ import { CompletionStatus } from '../../../shared/models/completion-status';
 })
 export class LibraryListEntry {
   private dialog = inject(MatDialog);
+  userService = inject(UserService);
+  userinfo = toSignal(this.userService.me());
   catalogDeletionHappened = output<void>();
 
-  libraryElement = input.required<{
+  libraryEntry = input.required<{
     id: string,
     title: string,
     releaseYear: number | null,
@@ -30,20 +35,20 @@ export class LibraryListEntry {
     if (!userId) {
       return false;
     }
-    const l = this.libraryElement() ?? {submittedById: " "};
+    const l = this.libraryEntry() ?? {submittedById: " "};
     return l.submittedById === userId;
   });
 
   openDetailDialog() {
     this.dialog.open(LibraryDetailDialog, {
       data: {
-        id: this.libraryElement().id,
-        title: this.libraryElement().title,
-        releaseYear: this.libraryElement().releaseYear,
-        description: this.libraryElement().description,
-        submittedById: this.libraryElement().submittedById,
-        status: this.libraryElement().status as CompletionStatus,
-        rating: this.libraryElement().rating,
+        id: this.libraryEntry().id,
+        title: this.libraryEntry().title,
+        releaseYear: this.libraryEntry().releaseYear,
+        description: this.libraryEntry().description,
+        submittedById: this.libraryEntry().submittedById,
+        status: this.libraryEntry().status as CompletionStatus,
+        rating: this.libraryEntry().rating,
         onLibraryChanged: () => this.libraryChanged.emit(),
         isOwner: this.isOwner(),
       },

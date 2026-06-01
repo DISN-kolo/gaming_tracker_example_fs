@@ -8,12 +8,12 @@
 }
 <ul class="library-list">
 	<li><app-new-library-list-entry (libraryEntryAdded)="refreshLibrary()" /></li>
-	@if (library() === undefined) {
+	@if (libraryEntries() === undefined) {
 		<li>Loading library...</li>
 	} @else if (isLibraryEmpty()) {
 		<li>Your library is empty.</li>
 	} @else {
-		@for (libraryElement of library()!; track libraryElement.id) {
+		@for (libraryElement of libraryEntries()!; track libraryElement.id) {
 			<li><app-library-list-entry [libraryEntry]="libraryElement" (libraryChanged)="refreshLibrary()" /></li>
 		}
 	}

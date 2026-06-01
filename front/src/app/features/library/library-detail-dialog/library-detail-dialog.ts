@@ -42,7 +42,7 @@ export class LibraryDetailDialog {
   detail = toSignal(
     this.refresh$.pipe(
       switchMap(() => forkJoin({
-        avgRating: this.gameService.getAverageRating(this.dialogData.gameId),
+        avgRating: this.gameService.getAverageRating(this.dialogData.id),
       }))
     )
   );
