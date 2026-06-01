@@ -1,4 +1,4 @@
-.game-card {
+.games-list-member {
 	background-color: #313131;
 	cursor: pointer;
 	border-radius: 6px;
@@ -11,18 +11,18 @@
 	gap: 2px;
 }
 
-.game-card__header {
+.games-list-member__header {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 }
 
-.game-card__title {
+.games-list-member__title {
 	font-size: 1rem;
 	font-weight: 500;
 }
 
-.game-card__year {
+.games-list-member__year {
 	font-size: 0.9rem;
 	color: #aaaaaa;
 }
@@ -31,7 +31,7 @@
 	flex: 1;
 }
 
-.game-card__library-badge {
+.games-list-member__library-badge {
 	position: absolute;
 	top: 0.4rem;
 	left: 1.25rem;
@@ -40,7 +40,7 @@
 	color: #aaaaaa;
 }
 
-.game-card__description {
+.games-list-member__description {
 	margin: 0;
 	font-size: 0.85rem;
 	color: #aaaaaa;

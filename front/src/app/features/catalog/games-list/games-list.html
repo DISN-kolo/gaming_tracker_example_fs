@@ -7,14 +7,14 @@
 	<p>Failed to load user</p>
 }
 <ul class="games-list">
-	<li><app-game-new-entry (gameAdded)="refreshGames()" /></li>
+	<li><app-new-games-list-member (gameAdded)="refreshGames()" /></li>
 	@if (games() === undefined) {
 		<li>Loading games...</li>
 	} @else if (isGamesEmpty()) {
 		<li>No games exist on this website!</li>
 	} @else {
 		@for (gamesElement of games()!; track gamesElement.id) {
-			<li><app-game-entry [game]="gamesElement" [inLibrary]="libraryEntries()?.has(gamesElement.id) ?? false" [libEntry]="libraryEntries()?.get(gamesElement.id)" [isOwner]="ownedGameIds().has(gamesElement.id)" (libraryChanged)="refreshGames()" /></li>
+			<li><app-games-list-member [game]="gamesElement" [inLibrary]="libraryEntries()?.has(gamesElement.id) ?? false" [libEntry]="libraryEntries()?.get(gamesElement.id)" [isOwner]="ownedGameIds().has(gamesElement.id)" (libraryChanged)="refreshGames()" /></li>
 		}
 	}
 </ul>

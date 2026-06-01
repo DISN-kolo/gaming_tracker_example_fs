@@ -16,11 +16,11 @@ import { MatButton } from '@angular/material/button';
 
 import { GameService } from '../../../core/game/game.service';
 
-import { COMPLETION_STATUSES, CompletionStatus, statusInList } from '../../../shared/models/completion-status';
-import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
+import { COMPLETION_STATUSES, CompletionStatus, statusInList } from '../../models/completion-status';
+import { preventNonInteger } from '../../utils/prevent-non-integer';
 
 @Component({
-  selector: 'app-game-library-edit-dialog',
+  selector: 'app-library-edit-dialog',
   imports: [
     ReactiveFormsModule,
     MatDialogTitle,
@@ -34,11 +34,11 @@ import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
     MatInput,
     MatButton,
   ],
-  templateUrl: './game-library-edit-dialog.html',
-  styleUrl: './game-library-edit-dialog.css',
+  templateUrl: './library-edit-dialog.html',
+  styleUrl: './library-edit-dialog.css',
 })
-export class GameLibraryEditDialog {
-  private dialogRef = inject(MatDialogRef<GameLibraryEditDialog>);
+export class LibraryEditDialog {
+  private dialogRef = inject(MatDialogRef<LibraryEditDialog>);
   private gameService = inject(GameService);
   private gameData: {
     gameId: string,

@@ -7,11 +7,11 @@ import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
 import { CompletionStatus } from '../../../shared/models/completion-status';
 
-import { GameEntry } from '../game-entry/game-entry';
-import { GameNewEntry } from '../game-new-entry/game-new-entry';
+import { GamesListMember } from '../games-list-member/games-list-member';
+import { NewGamesListMember } from '../new-games-list-member/new-games-list-member';
 
 @Component({
-  imports: [GameEntry, GameNewEntry],
+  imports: [GamesListMember, NewGamesListMember],
   selector: 'app-games-list',
   templateUrl: './games-list.html',
   styleUrl: './games-list.css',

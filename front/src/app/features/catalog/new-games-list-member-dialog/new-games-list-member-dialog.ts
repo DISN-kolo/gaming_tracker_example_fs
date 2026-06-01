@@ -1,25 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
-  MAT_DIALOG_DATA,
   MatDialogRef,
   MatDialogTitle,
   MatDialogContent,
   MatDialogActions,
   MatDialogClose,
 } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
-import { MatOption } from '@angular/material/core';
+import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 
 import { GameService } from '../../../core/game/game.service';
-import { COMPLETION_STATUSES, CompletionStatus, statusInList } from '../../../shared/models/completion-status';
 import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
 
 @Component({
-  selector: 'app-game-library-add-dialog',
+  selector: 'app-new-games-list-member-dialog',
   imports: [
     ReactiveFormsModule,
     MatDialogTitle,
@@ -28,34 +24,32 @@ import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
     MatDialogClose,
     MatFormField,
     MatLabel,
-    MatSelect,
-    MatOption,
     MatInput,
     MatButton,
+    MatHint
   ],
-  templateUrl: './game-library-add-dialog.html',
-  styleUrl: './game-library-add-dialog.css',
+  templateUrl: './new-games-list-member-dialog.html',
+  styleUrl: './new-games-list-member-dialog.css',
 })
-export class GameLibraryAddDialog {
-  private dialogRef = inject(MatDialogRef<GameLibraryAddDialog>);
+export class NewGamesListMemberDialog {
+  private dialogRef = inject(MatDialogRef<NewGamesListMemberDialog>);
   private gameService = inject(GameService);
-  private gameId: string = inject(MAT_DIALOG_DATA);
 
-  statuses = COMPLETION_STATUSES;
   protected readonly preventNonInteger = preventNonInteger;
 
   form = inject(FormBuilder).group({
-    status: [null as CompletionStatus | null, [Validators.required, statusInList(COMPLETION_STATUSES)]],
-    rating: [null as number | null, [Validators.min(1), Validators.max(10)]],
+    title: ['', [Validators.required, Validators.maxLength(200)]],
+    releaseYear: [null as number | null],
+    description: [null as string | null, Validators.maxLength(512)],
   });
 
   submit() {
     if (this.form.invalid) {
-      console.error(this.form.errors);
+      console.error("Invalid form in NewGamesListMemberDialog");
       return ;
     }
-    const { status, rating } = this.form.value;
-    this.gameService.addToLibrary(this.gameId, status!, rating ?? null).subscribe({
+    const { title, releaseYear, description } = this.form.value;
+    this.gameService.createGame(title!, releaseYear ?? null, description ?? null).subscribe({
       next: () => this.dialogRef.close(true),
       error: (err) => console.error(err),
     });

@@ -1,17 +1,17 @@
 import { Component, inject, input, output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { GameKebabMenu } from '../game-kebab-menu/game-kebab-menu';
-import { GameDetailDialog } from '../game-detail-dialog/game-detail-dialog';
+import { GameKebabMenu } from '../../../shared/components/game-kebab-menu/game-kebab-menu';
+import { GameDetailDialog } from '../../../shared/components/game-detail-dialog/game-detail-dialog';
 import { CompletionStatus } from '../../../shared/models/completion-status';
 
 @Component({
-  selector: 'app-game-entry',
+  selector: 'app-games-list-member',
   imports: [GameKebabMenu],
-  templateUrl: './game-entry.html',
-  styleUrl: './game-entry.css',
+  templateUrl: './games-list-member.html',
+  styleUrl: './games-list-member.css',
 })
-export class GameEntry {
+export class GamesListMember {
   private dialog = inject(MatDialog);
   catalogDeletionHappened = output<void>();
 

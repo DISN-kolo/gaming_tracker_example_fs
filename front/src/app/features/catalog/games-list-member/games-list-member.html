@@ -1,0 +1,23 @@
+<div class="games-list-member" (click)="openDetailDialog()">
+	@if (inLibrary()) {
+		<span class="games-list-member__library-badge">In Library</span>
+	}
+	<div class="games-list-member__header">
+		<span class="games-list-member__title">{{ game().title }}</span>
+		@if (game().releaseYear) {
+			<span class="games-list-member__year">({{ game().releaseYear }})</span>
+		}
+		<span class="spacer"></span>
+		<app-game-kebab-menu
+			[gameId]="game().id"
+			[inLibrary]="inLibrary()"
+			[isOwner]="isOwner()"
+			[libEntry]="libEntry()"
+			(libraryChanged)="libraryChanged.emit()"
+			(catalogDeletionHappened) = "onCatalogDeletionHappened()"
+		/>
+	</div>
+	@if (game().description) {
+		<p class="games-list-member__description">{{ game().description }}</p>
+	}
+</div>

@@ -13,7 +13,7 @@ import { MatButton } from '@angular/material/button';
 
 import { GameService } from '../../../core/game/game.service';
 import { GameKebabMenu } from '../game-kebab-menu/game-kebab-menu';
-import { CompletionStatus } from '../../../shared/models/completion-status';
+import { CompletionStatus } from '../../models/completion-status';
 
 @Component({
   selector: 'app-game-detail-dialog',

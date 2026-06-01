@@ -12,7 +12,7 @@ import { MatButton } from '@angular/material/button';
 import { GameService } from '../../../core/game/game.service';
 
 @Component({
-  selector: 'app-game-catalog-delete-dialog',
+  selector: 'app-game-delete-dialog',
   imports: [
     MatDialogTitle,
     MatDialogContent,
@@ -20,11 +20,11 @@ import { GameService } from '../../../core/game/game.service';
     MatDialogClose,
     MatButton,
   ],
-  templateUrl: './game-catalog-delete-dialog.html',
-  styleUrl: './game-catalog-delete-dialog.css',
+  templateUrl: './game-delete-dialog.html',
+  styleUrl: './game-delete-dialog.css',
 })
-export class GameCatalogDeleteDialog {
-  private dialogRef = inject(MatDialogRef<GameCatalogDeleteDialog>);
+export class GameDeleteDialog {
+  private dialogRef = inject(MatDialogRef<GameDeleteDialog>);
   data = inject<{ gameId: string, message: string }>(MAT_DIALOG_DATA);
   private gameService = inject(GameService);
 
