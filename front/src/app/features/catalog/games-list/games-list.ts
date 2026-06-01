@@ -7,8 +7,8 @@ import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
 import { CompletionStatus } from '../../../shared/models/completion-status';
 
-import { GamesListMember } from '../games-list-member/games-list-member';
-import { NewGamesListMember } from '../new-games-list-member/new-games-list-member';
+import { GamesListMember } from '../games-list-entry/games-list-entry';
+import { NewGamesListMember } from '../new-games-list-entry/new-games-list-entry';
 
 @Component({
   imports: [GamesListMember, NewGamesListMember],

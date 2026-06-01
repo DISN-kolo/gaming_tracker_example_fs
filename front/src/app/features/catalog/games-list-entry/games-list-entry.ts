@@ -6,10 +6,10 @@ import { GameDetailDialog } from '../../../shared/components/game-detail-dialog/
 import { CompletionStatus } from '../../../shared/models/completion-status';
 
 @Component({
-  selector: 'app-games-list-member',
+  selector: 'app-games-list-entry',
   imports: [GameKebabMenu],
-  templateUrl: './games-list-member.html',
-  styleUrl: './games-list-member.css',
+  templateUrl: './games-list-entry.html',
+  styleUrl: './games-list-entry.css',
 })
 export class GamesListMember {
   private dialog = inject(MatDialog);

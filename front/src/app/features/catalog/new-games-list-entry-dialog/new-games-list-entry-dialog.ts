@@ -15,7 +15,7 @@ import { GameService } from '../../../core/game/game.service';
 import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
 
 @Component({
-  selector: 'app-new-games-list-member-dialog',
+  selector: 'app-new-games-list-entry-dialog',
   imports: [
     ReactiveFormsModule,
     MatDialogTitle,
@@ -28,8 +28,8 @@ import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
     MatButton,
     MatHint
   ],
-  templateUrl: './new-games-list-member-dialog.html',
-  styleUrl: './new-games-list-member-dialog.css',
+  templateUrl: './new-games-list-entry-dialog.html',
+  styleUrl: './new-games-list-entry-dialog.css',
 })
 export class NewGamesListMemberDialog {
   private dialogRef = inject(MatDialogRef<NewGamesListMemberDialog>);

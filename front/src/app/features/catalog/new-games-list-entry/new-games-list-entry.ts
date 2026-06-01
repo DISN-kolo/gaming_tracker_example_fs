@@ -2,13 +2,13 @@ import { Component, inject, output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 
-import { NewGamesListMemberDialog } from '../new-games-list-member-dialog/new-games-list-member-dialog';
+import { NewGamesListMemberDialog } from '../new-games-list-entry-dialog/new-games-list-entry-dialog';
 
 @Component({
-  selector: 'app-new-games-list-member',
+  selector: 'app-new-games-list-entry',
   imports: [MatButton],
-  templateUrl: './new-games-list-member.html',
-  styleUrl: './new-games-list-member.css',
+  templateUrl: './new-games-list-entry.html',
+  styleUrl: './new-games-list-entry.css',
 })
 export class NewGamesListMember {
   private dialog = inject(MatDialog);
