@@ -1,0 +1,21 @@
+<p>Library list (placeholder)</p>
+@if (userinfo() === undefined) {
+	<p>Hello, user...<p>
+} @else if (userinfo()!.hasOwnProperty('username')) {
+	<p>Hello, {{ userinfo()!.username }}</p>
+} @else {
+	<p>Failed to load user</p>
+}
+<ul class="library-list">
+	<li><app-new-library-list-member (libraryEntryAdded)="refreshLibrary()" /></li>
+	@if (library() === undefined) {
+		<li>Loading library...</li>
+	} @else if (isLibraryEmpty()) {
+		<li>Your library is empty.</li>
+	} @else {
+		@for (libraryElement of library()!; track libraryElement.id) {
+			<li><app-library-list-member [libraryEntry]="libraryElement" (libraryChanged)="refreshLibrary()" /></li>
+		}
+	}
+</ul>
+<div class="list-bottom-spacer"></div>
