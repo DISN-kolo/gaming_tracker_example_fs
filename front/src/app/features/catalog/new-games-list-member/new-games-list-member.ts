@@ -10,7 +10,7 @@ import { NewGamesListMemberDialog } from '../new-games-list-member-dialog/new-ga
   templateUrl: './new-games-list-member.html',
   styleUrl: './new-games-list-member.css',
 })
-export class GameNewEntry {
+export class NewGamesListMember {
   private dialog = inject(MatDialog);
   gameAdded = output<void>();
 

@@ -30,7 +30,7 @@ export const routes: Routes = [
       },
       {
         path: 'catalog',
-        loadComponent: () => import('./features/games/games-list/games-list')
+        loadComponent: () => import('./features/catalog/games-list/games-list')
         .then(m => m.GamesList)
       },
     ]
