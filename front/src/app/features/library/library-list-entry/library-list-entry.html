@@ -1,7 +1,7 @@
 <div class="library-list-entry" (click)="openDetailDialog()">
 	<div class="library-list-entry__header">
 		<span class="library-list-entry__title">{{ libraryElement().title }}</span>
-		@if (game().releaseYear) {
+		@if (libraryElement().releaseYear) {
 			<span class="library-list-entry__year">({{ libraryElement().releaseYear }})</span>
 		}
 		<span class="spacer"></span>

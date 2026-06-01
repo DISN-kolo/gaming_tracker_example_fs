@@ -2,7 +2,7 @@ import { Component, inject, input, output, computed } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { GameKebabMenu } from '../../../shared/components/game-kebab-menu/game-kebab-menu';
-import { LibraryDetailDialog } from '../../../shared/components/game-detail-dialog/game-detail-dialog';
+import { LibraryDetailDialog } from '../library-detail-dialog/library-detail-dialog';
 import { CompletionStatus } from '../../../shared/models/completion-status';
 
 @Component({
