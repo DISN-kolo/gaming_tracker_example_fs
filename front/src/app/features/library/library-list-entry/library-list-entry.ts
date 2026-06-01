@@ -37,14 +37,15 @@ export class LibraryListEntry {
   openDetailDialog() {
     this.dialog.open(LibraryDetailDialog, {
       data: {
-        id: e.id,
-        title: e.title,
-        releaseYear: e.releaseYear,
-        description: e.description,
-        submittedById: e.submittedById,
-        status: e.status as CompletionStatus,
-        rating: e.rating,
-        onLibraryChanged: () => this.libraryChanged.emit()
+        id: this.libraryElement().id,
+        title: this.libraryElement().title,
+        releaseYear: this.libraryElement().releaseYear,
+        description: this.libraryElement().description,
+        submittedById: this.libraryElement().submittedById,
+        status: this.libraryElement().status as CompletionStatus,
+        rating: this.libraryElement().rating,
+        onLibraryChanged: () => this.libraryChanged.emit(),
+        isOwner: this.isOwner(),
       },
     });
   }
