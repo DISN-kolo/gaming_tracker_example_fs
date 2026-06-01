@@ -11,7 +11,7 @@ import { CompletionStatus } from '../../../shared/models/completion-status';
   templateUrl: './games-list-entry.html',
   styleUrl: './games-list-entry.css',
 })
-export class GamesListMember {
+export class GamesListEntry {
   private dialog = inject(MatDialog);
   catalogDeletionHappened = output<void>();
 

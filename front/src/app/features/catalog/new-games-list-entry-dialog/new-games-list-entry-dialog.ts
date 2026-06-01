@@ -31,8 +31,8 @@ import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
   templateUrl: './new-games-list-entry-dialog.html',
   styleUrl: './new-games-list-entry-dialog.css',
 })
-export class NewGamesListMemberDialog {
-  private dialogRef = inject(MatDialogRef<NewGamesListMemberDialog>);
+export class NewGamesListEntryDialog {
+  private dialogRef = inject(MatDialogRef<NewGamesListEntryDialog>);
   private gameService = inject(GameService);
 
   protected readonly preventNonInteger = preventNonInteger;
@@ -45,7 +45,7 @@ export class NewGamesListMemberDialog {
 
   submit() {
     if (this.form.invalid) {
-      console.error("Invalid form in NewGamesListMemberDialog");
+      console.error("Invalid form in NewGamesListEntryDialog");
       return ;
     }
     const { title, releaseYear, description } = this.form.value;

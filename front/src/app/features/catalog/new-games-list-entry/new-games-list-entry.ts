@@ -2,7 +2,7 @@ import { Component, inject, output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 
-import { NewGamesListMemberDialog } from '../new-games-list-entry-dialog/new-games-list-entry-dialog';
+import { NewGamesListEntryDialog } from '../new-games-list-entry-dialog/new-games-list-entry-dialog';
 
 @Component({
   selector: 'app-new-games-list-entry',
@@ -10,12 +10,12 @@ import { NewGamesListMemberDialog } from '../new-games-list-entry-dialog/new-gam
   templateUrl: './new-games-list-entry.html',
   styleUrl: './new-games-list-entry.css',
 })
-export class NewGamesListMember {
+export class NewGamesListEntry {
   private dialog = inject(MatDialog);
   gameAdded = output<void>();
 
   openDialog() {
-    const dialogRef = this.dialog.open(NewGamesListMemberDialog);
+    const dialogRef = this.dialog.open(NewGamesListEntryDialog);
     dialogRef.afterClosed().subscribe((created: boolean) => {
       if (created) {
         this.gameAdded.emit();

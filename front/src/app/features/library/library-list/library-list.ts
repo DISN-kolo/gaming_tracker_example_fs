@@ -7,11 +7,11 @@ import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
 import { CompletionStatus } from '../../../shared/models/completion-status';
 
-import { LibraryListMember } from '../library-list-entry/library-list-entry';
-import { NewLibraryListMember } from '../new-library-list-entry/new-library-list-entry';
+import { LibraryListEntry } from '../library-list-entry/library-list-entry';
+import { NewLibraryListEntry } from '../new-library-list-entry/new-library-list-entry';
 
 @Component({
-  imports: [LibraryListMember, NewLibraryListMember],
+  imports: [LibraryListEntry, NewLibraryListEntry],
   selector: 'app-library-list',
   templateUrl: './library-list.html',
   styleUrl: './library-list.css',
