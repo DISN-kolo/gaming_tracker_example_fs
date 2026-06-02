@@ -1,3 +1,44 @@
-<div>
-	<p>lol</p>
+<div mat-dialog-title class="dialog-title">
+	@if (dialogData === undefined) {
+		<span>Loading...</span>
+	} @else {
+		<span class="dialog-title__text">
+			{{ dialogData.title }}
+		</span>
+		<span class="spacer"></span>
+		<app-game-kebab-menu
+			[gameId]="dialogData.id"
+			[inLibrary]="true"
+			[isOwner]="isOwner"
+			[libEntry]="{ status: dialogData.status, rating: dialogData.rating }"
+			(libraryChanged)="onLibraryChanged()"
+			(catalogDeletionHappened)="onCatalogDeletionHappened()"
+		/>
+	}
 </div>
+
+<mat-dialog-content>
+	@if (dialogData !== undefined) {
+		@if (dialogData.releaseYear) {
+			<p>Release year: {{ dialogData.releaseYear }}</p>
+		}
+		@if (dialogData.description) {
+			<p>Description:</p>
+			<p class="description">{{ dialogData.description }}</p>
+		} @else {
+			<p>No description.</p>
+		}
+		@if (averageRating() && averageRating()!.averageRating !== null) {
+			<p>Average rating: {{ averageRating()!.averageRating!.toFixed(1) }} / 10</p>
+		} @else {
+			<p>No ratings yet.</p>
+		}
+		@if (uploader()) {
+			<p>Uploaded by: {{ uploader()!.username }}</p>
+		}
+	}
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

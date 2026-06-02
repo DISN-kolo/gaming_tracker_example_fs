@@ -51,4 +51,16 @@ public class AuthController : ControllerBase
 		}
 		return Ok(response);
 	}
+
+	[HttpGet("{id}/username")]
+	[Authorize]
+	public async Task<ActionResult<MeResponse>> Username(Guid id)
+	{
+		var response = await _authService.UsernameAsync(id);
+		if (response is null)
+		{
+			return Unauthorized();
+		}
+		return Ok(response);
+	}
 }

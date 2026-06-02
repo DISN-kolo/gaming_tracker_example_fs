@@ -75,6 +75,17 @@ public class AuthService
 			.SingleOrDefaultAsync();
 	}
 
+	public async Task<UsernameResponse?> UsernameAsync(Guid id)
+	{
+		return await _context.Users
+			.Where(u => u.Id == id)
+			.Select(u => new UsernameResponse
+			{
+				Username = u.Name,
+			})
+			.SingleOrDefaultAsync();
+	}
+
 	private string GenerateToken(User user)
 	{
 		var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));

@@ -10,4 +10,8 @@ export class UserService {
   me() {
     return this.http.get<{ id: string, username: string, email: string }>(`${environment.apiUrl}/api/auth/me/`);
   };
+
+  getUsername(id: string) {
+    return this.http.get<{ username: string }>(`${environment.apiUrl}/api/auth/${id}/username`);
+  };
 };

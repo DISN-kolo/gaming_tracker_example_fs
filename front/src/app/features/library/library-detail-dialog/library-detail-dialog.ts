@@ -1,6 +1,6 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, catchError, forkJoin, of, switchMap } from 'rxjs';
+import { BehaviorSubject, of, switchMap } from 'rxjs';
 import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
@@ -11,6 +11,7 @@ import {
 } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 
+import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
 import { GameKebabMenu } from '../../../shared/components/game-kebab-menu/game-kebab-menu';
 import { CompletionStatus } from '../../../shared/models/completion-status';
@@ -24,7 +25,8 @@ import { CompletionStatus } from '../../../shared/models/completion-status';
 export class LibraryDetailDialog {
   private dialogRef = inject(MatDialogRef<LibraryDetailDialog>);
   private gameService = inject(GameService);
-  private dialogData: {
+  private userService = inject(UserService);
+  public dialogData: {
     id: string,
     title: string,
     releaseYear: number | null,
@@ -39,11 +41,20 @@ export class LibraryDetailDialog {
 
   private refresh$ = new BehaviorSubject<void>(undefined);
 
-  detail = toSignal(
+  averageRating = toSignal(
     this.refresh$.pipe(
-      switchMap(() => forkJoin({
-        avgRating: this.gameService.getAverageRating(this.dialogData.id),
-      }))
+      switchMap(() => this.gameService.getAverageRating(this.dialogData.id))
+    )
+  );
+
+  uploader = toSignal(
+    this.refresh$.pipe(
+      switchMap(() => {
+        if (this.dialogData.submittedById === null) {
+          return of(null);
+        }
+        return this.userService.getUsername(this.dialogData.submittedById);
+      })
     )
   );
 
