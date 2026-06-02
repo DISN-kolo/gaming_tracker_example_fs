@@ -2,7 +2,7 @@
 	display: block;
 }
 
-.games-list {
+.library-list {
 	list-style: none;
 	padding: 0;
 	margin: 2rem auto 0;
@@ -16,6 +16,6 @@
 	height: 4rem;
 }
 
-.games-list li {
+.library-list li {
 	list-style: none;
 }

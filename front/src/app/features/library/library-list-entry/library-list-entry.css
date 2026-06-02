@@ -1,4 +1,4 @@
-.games-list-entry {
+.library-list-entry {
 	background-color: #313131;
 	cursor: pointer;
 	border-radius: 6px;
@@ -11,18 +11,18 @@
 	gap: 2px;
 }
 
-.games-list-entry__header {
+.library-list-entry__header {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 }
 
-.games-list-entry__title {
+.library-list-entry__title {
 	font-size: 1rem;
 	font-weight: 500;
 }
 
-.games-list-entry__year {
+.library-list-entry__year {
 	font-size: 0.9rem;
 	color: #aaaaaa;
 }
@@ -31,7 +31,7 @@
 	flex: 1;
 }
 
-.games-list-entry__library-badge {
+.library-list-entry__library-badge {
 	position: absolute;
 	top: 0.4rem;
 	left: 1.25rem;
@@ -40,7 +40,7 @@
 	color: #aaaaaa;
 }
 
-.games-list-entry__description {
+.library-list-entry__description {
 	margin: 0;
 	font-size: 0.85rem;
 	color: #aaaaaa;
