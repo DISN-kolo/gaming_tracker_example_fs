@@ -52,7 +52,7 @@ export class GameService {
       releaseYear: number | null,
       description: string | null,
       submittedById: string | null,
-      status: CompletionStatus | null,
+      status: CompletionStatus,
       rating: number | null,
     }>(`${environment.apiUrl}/api/games/${id}/library`);
   };

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, of, switchMap, forkJoin } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap, forkJoin, map } from 'rxjs';
 import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
@@ -35,17 +35,21 @@ export class LibraryDetailDialog {
   private refresh$ = new BehaviorSubject<void>(undefined);
   gameData = toSignal(
     this.refresh$.pipe(
-      switchMap(() => forkJoin({
+      switchMap(() => {
+        let uploaderObs: Observable<{ username: string } | null>;
+        if (this.dialogData.submittedById === null) {
+          uploaderObs = of(null);
+        } else {
+          uploaderObs = this.userService.getUsername(this.dialogData.submittedById);
+        }
+        return forkJoin({
           entry: this.gameService.getByIdFromLibrary(this.dialogData.id),
-          averageRating: this.gameService.getAverageRating(this.dialogData.id),
-          uploader: () => {
-            if (this.dialogData.submittedById === null) {
-              return of(null);
-            }
-            return this.userService.getUsername(this.dialogData.submittedById);
-          }
-        })
-      )
+          averageRating: this.gameService.getAverageRating(this.dialogData.id).pipe(
+            map(r => r.averageRating)
+          ),
+          uploader: uploaderObs
+        });
+      })
     )
   );
   public isOwner = this.dialogData.isOwner;
