@@ -33,6 +33,7 @@
 		} @else {
 			<p>No ratings yet.</p>
 		}
+		<p>My status: {{ getStatusText(data.entry.status) }}</p>
 		@if (data.entry.rating) {
 			<p>My rating: {{ data.entry.rating }} / 10</p>
 		}

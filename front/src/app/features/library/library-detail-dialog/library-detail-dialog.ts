@@ -14,7 +14,7 @@ import { MatButton } from '@angular/material/button';
 import { UserService } from '../../../core/user/user.service';
 import { GameService } from '../../../core/game/game.service';
 import { GameKebabMenu } from '../../../shared/components/game-kebab-menu/game-kebab-menu';
-import { CompletionStatus } from '../../../shared/models/completion-status';
+import { CompletionStatus, COMPLETION_STATUSES } from '../../../shared/models/completion-status';
 
 @Component({
   selector: 'app-library-detail-dialog',
@@ -63,5 +63,12 @@ export class LibraryDetailDialog {
   onCatalogDeletionHappened() {
     this.dialogData.onLibraryChanged();
     this.dialogRef.close();
+  }
+
+  getStatusText(status: CompletionStatus | null) {
+    if (status === null) {
+      return null;
+    }
+    return COMPLETION_STATUSES.find(s => s.value === status)?.label ?? null;
   }
 }
