@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, of, switchMap } from 'rxjs';
+import { BehaviorSubject, of, switchMap, forkJoin } from 'rxjs';
 import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
@@ -28,35 +28,28 @@ export class LibraryDetailDialog {
   private userService = inject(UserService);
   public dialogData: {
     id: string,
-    title: string,
-    releaseYear: number | null,
-    description: string | null,
     submittedById: string | null,
-    status: CompletionStatus,
-    rating: number | null,
     onLibraryChanged: () => void,
     isOwner: boolean
   } = inject(MAT_DIALOG_DATA);
+  private refresh$ = new BehaviorSubject<void>(undefined);
+  gameData = toSignal(
+    this.refresh$.pipe(
+      switchMap(() => forkJoin({
+          entry: this.gameService.getByIdFromLibrary(this.dialogData.id),
+          averageRating: this.gameService.getAverageRating(this.dialogData.id),
+          uploader: () => {
+            if (this.dialogData.submittedById === null) {
+              return of(null);
+            }
+            return this.userService.getUsername(this.dialogData.submittedById);
+          }
+        })
+      )
+    )
+  );
   public isOwner = this.dialogData.isOwner;
 
-  private refresh$ = new BehaviorSubject<void>(undefined);
-
-  averageRating = toSignal(
-    this.refresh$.pipe(
-      switchMap(() => this.gameService.getAverageRating(this.dialogData.id))
-    )
-  );
-
-  uploader = toSignal(
-    this.refresh$.pipe(
-      switchMap(() => {
-        if (this.dialogData.submittedById === null) {
-          return of(null);
-        }
-        return this.userService.getUsername(this.dialogData.submittedById);
-      })
-    )
-  );
 
   onLibraryChanged() {
     this.refresh$.next();

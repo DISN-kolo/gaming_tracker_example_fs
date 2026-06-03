@@ -10,7 +10,7 @@
 			[gameId]="dialogData.id"
 			[inLibrary]="true"
 			[isOwner]="isOwner"
-			[libEntry]="{ status: dialogData.status, rating: dialogData.rating }"
+			[libEntry]="{ status: gameData().entry.status, rating: gameData().entry.rating }"
 			(libraryChanged)="onLibraryChanged()"
 			(catalogDeletionHappened)="onCatalogDeletionHappened()"
 		/>
@@ -33,8 +33,11 @@
 		} @else {
 			<p>No ratings yet.</p>
 		}
-		@if (uploader()) {
-			<p>Uploaded by: {{ uploader()!.username }}</p>
+		@if (dialogData.rating) {
+			<p>My rating: {{ dialogData.rating }} / 10</p>
+		}
+		@if (gameData().uploader) {
+			<p>Uploaded by: {{ gameData().uploader!.username }}</p>
 		}
 	}
 </mat-dialog-content>
