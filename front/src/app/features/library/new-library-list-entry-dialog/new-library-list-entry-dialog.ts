@@ -27,9 +27,11 @@ import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
   styleUrl: './new-library-list-entry-dialog.css',
 })
 export class NewLibraryListEntryDialog {
+  private dialogRef = inject(MatDialogRef<NewLibraryListEntryDialog>);
   private router = inject(Router);
   gotoCatalog() {
     this.router.navigate(['catalog']);
+    this.dialogRef.close();
   }
   spawnLibraryAndCatalogAddDialog() {
     console.log("this must spawn a thing");
