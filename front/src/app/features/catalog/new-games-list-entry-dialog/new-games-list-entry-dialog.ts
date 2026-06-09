@@ -50,7 +50,7 @@ export class NewGamesListEntryDialog {
     }
     const { title, releaseYear, description } = this.form.value;
     this.gameService.createGame(title!, releaseYear ?? null, description ?? null).subscribe({
-      next: () => this.dialogRef.close(true),
+      next: (r) => this.dialogRef.close(r.id),
       error: (err) => console.error(err),
     });
   }

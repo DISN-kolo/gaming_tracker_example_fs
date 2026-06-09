@@ -16,8 +16,8 @@ export class NewGamesListEntry {
 
   openDialog() {
     const dialogRef = this.dialog.open(NewGamesListEntryDialog);
-    dialogRef.afterClosed().subscribe((created: boolean) => {
-      if (created) {
+    dialogRef.afterClosed().subscribe((gameid: string) => {
+      if (gameid) {
         this.gameAdded.emit();
       }
     });
