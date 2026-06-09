@@ -2,7 +2,7 @@ import { Component, inject, output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 
-import { NewGamesListEntryDialog } from '../new-games-list-entry-dialog/new-games-list-entry-dialog';
+import { NewGamesListEntryDialog } from '../../../shared/components/new-games-list-entry-dialog/new-games-list-entry-dialog';
 
 @Component({
   selector: 'app-new-games-list-entry',
