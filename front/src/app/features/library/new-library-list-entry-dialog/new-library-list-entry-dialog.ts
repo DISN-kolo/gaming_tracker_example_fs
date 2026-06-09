@@ -16,6 +16,8 @@ import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
 import { NewGamesListEntryDialog } from '../../../shared/components/new-games-list-entry-dialog/new-games-list-entry-dialog';
 import { LibraryAddDialog } from '../../../shared/components/library-add-dialog/library-add-dialog';
 
+import { filter } from 'rxjs/operators';
+
 @Component({
   selector: 'app-new-library-list-entry-dialog',
   imports: [
@@ -52,12 +54,21 @@ export class NewLibraryListEntryDialog {
         gameId: gameid,
         needsCloseWarning: true,
       },
+      disableClose: true,
     });
+    dialogRef.backdropClick().subscribe(() => this.spawnQuitWarning());
+    dialogRef.keydownEvents().pipe(
+      filter(e => e.key === 'Escape')
+    ).subscribe(() => this.spawnQuitWarning());
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.dialogRef.close(true);
       }
     });
+  }
+
+  spawnQuitWarning() {
+    console.log("xd no lo puedaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssssssssssssss");
   }
   /*
   private dialogRef = inject(MatDialogRef<NewLibraryListEntryDialog>);
