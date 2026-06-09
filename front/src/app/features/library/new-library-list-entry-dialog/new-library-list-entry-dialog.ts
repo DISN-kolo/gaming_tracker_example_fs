@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
+  MatDialog,
   MatDialogRef,
   MatDialogTitle,
   MatDialogContent,
@@ -12,6 +13,8 @@ import { MatButton } from '@angular/material/button';
 
 import { GameService } from '../../../core/game/game.service';
 import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
+import { NewGamesListEntryDialog } from '../../../shared/components/new-games-list-entry-dialog/new-games-list-entry-dialog';
+import { LibraryAddDialog } from '../../../shared/components/library-add-dialog/library-add-dialog';
 
 @Component({
   selector: 'app-new-library-list-entry-dialog',
@@ -28,13 +31,31 @@ import { preventNonInteger } from '../../../shared/utils/prevent-non-integer';
 })
 export class NewLibraryListEntryDialog {
   private dialogRef = inject(MatDialogRef<NewLibraryListEntryDialog>);
+  private dialog = inject(MatDialog);
   private router = inject(Router);
+  libraryChanged = output<void>();
   gotoCatalog() {
     this.router.navigate(['catalog']);
     this.dialogRef.close();
   }
   spawnLibraryAndCatalogAddDialog() {
-    console.log("this must spawn a thing");
+    const dialogRef = this.dialog.open(NewGamesListEntryDialog);
+    dialogRef.afterClosed().subscribe((gameid: string) => {
+      if (gameid) {
+        this.openLibraryAddDialog(gameid);
+      }
+    });
+  }
+
+  openLibraryAddDialog(gameid: string) {
+    const dialogRef = this.dialog.open(LibraryAddDialog, {
+      data: gameid,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.libraryChanged.emit();
+      }
+    });
   }
   /*
   private dialogRef = inject(MatDialogRef<NewLibraryListEntryDialog>);
