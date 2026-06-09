@@ -39,7 +39,7 @@ import { preventNonInteger } from '../../utils/prevent-non-integer';
 export class LibraryAddDialog {
   private dialogRef = inject(MatDialogRef<LibraryAddDialog>);
   private gameService = inject(GameService);
-  private gameId: string = inject(MAT_DIALOG_DATA);
+  public dialogData: {gameId: string, needsCloseWarning: boolean} = inject(MAT_DIALOG_DATA);
 
   statuses = COMPLETION_STATUSES;
   protected readonly preventNonInteger = preventNonInteger;
@@ -55,7 +55,7 @@ export class LibraryAddDialog {
       return ;
     }
     const { status, rating } = this.form.value;
-    this.gameService.addToLibrary(this.gameId, status!, rating ?? null).subscribe({
+    this.gameService.addToLibrary(this.dialogData.gameId, status!, rating ?? null).subscribe({
       next: () => this.dialogRef.close(true),
       error: (err) => console.error(err),
     });

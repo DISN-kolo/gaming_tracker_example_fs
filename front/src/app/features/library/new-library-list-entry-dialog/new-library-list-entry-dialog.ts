@@ -48,7 +48,10 @@ export class NewLibraryListEntryDialog {
 
   openLibraryAddDialog(gameid: string) {
     const dialogRef = this.dialog.open(LibraryAddDialog, {
-      data: gameid,
+      data: {
+        gameId: gameid,
+        needsCloseWarning: true,
+      },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

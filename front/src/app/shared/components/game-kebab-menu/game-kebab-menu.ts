@@ -31,7 +31,10 @@ export class GameKebabMenu {
 
   openLibraryAddDialog() {
     const dialogRef = this.dialog.open(LibraryAddDialog, {
-      data: this.gameId(),
+      data: {
+        gameId: this.gameId(),
+        needsCloseWarning: false,
+      },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
