@@ -33,7 +33,6 @@ export class NewLibraryListEntryDialog {
   private dialogRef = inject(MatDialogRef<NewLibraryListEntryDialog>);
   private dialog = inject(MatDialog);
   private router = inject(Router);
-  libraryChanged = output<void>();
   gotoCatalog() {
     this.router.navigate(['catalog']);
     this.dialogRef.close();
@@ -53,7 +52,7 @@ export class NewLibraryListEntryDialog {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.libraryChanged.emit();
+        this.dialogRef.close(true);
       }
     });
   }

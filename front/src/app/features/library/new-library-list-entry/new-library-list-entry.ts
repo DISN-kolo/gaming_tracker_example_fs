@@ -12,11 +12,15 @@ import { NewLibraryListEntryDialog } from '../new-library-list-entry-dialog/new-
 })
 export class NewLibraryListEntry {
   private dialog = inject(MatDialog);
+  libraryEntryAdded = output<void>();
 
   openDialog() {
     const dialogRef = this.dialog.open(NewLibraryListEntryDialog);
     dialogRef.afterClosed().subscribe((created: boolean) => {
       console.log("dialog closed with: ", created);
+      if (created) {
+        this.libraryEntryAdded.emit();
+      }
     });
   }
 };
