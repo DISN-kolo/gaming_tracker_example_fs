@@ -72,6 +72,19 @@ export class NewLibraryListEntryDialog {
 
   spawnQuitWarning() {
     const dialogRef = this.dialog.open(LibraryAddDialogQuitWarning);
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result) {
+        if (result === "delete") {
+          console.log("delete the game");
+        } else if (result === "keep") {
+          console.log("stop the library addition but keep the game in the catalog");
+        } else {
+          console.log("will this logic branch hit?");
+        }
+      } else {
+        console.log("go on with the process of adding the game to the library");
+      }
+    })
   }
   /*
   private dialogRef = inject(MatDialogRef<NewLibraryListEntryDialog>);
