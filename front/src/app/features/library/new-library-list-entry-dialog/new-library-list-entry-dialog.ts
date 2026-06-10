@@ -5,9 +5,9 @@ import {
   MatDialog,
   MatDialogRef,
   MatDialogTitle,
-  MatDialogContent,
   MatDialogActions,
   MatDialogClose,
+  MatDialogContent,
 } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 
@@ -23,9 +23,9 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-new-library-list-entry-dialog',
   imports: [
+    MatDialogContent,
     ReactiveFormsModule,
     MatDialogTitle,
-    MatDialogContent,
     MatDialogActions,
     MatDialogClose,
     MatButton,
@@ -35,6 +35,8 @@ import { filter } from 'rxjs/operators';
 })
 export class NewLibraryListEntryDialog {
   private dialogRef = inject(MatDialogRef<NewLibraryListEntryDialog>);
+  private libaddDialogRef: MatDialogRef<LibraryAddDialog> | null = null;
+  private gameService = inject(GameService);
   private dialog = inject(MatDialog);
   private router = inject(Router);
   gotoCatalog() {
@@ -51,18 +53,18 @@ export class NewLibraryListEntryDialog {
   }
 
   openLibraryAddDialog(gameid: string) {
-    const dialogRef = this.dialog.open(LibraryAddDialog, {
+    this.libaddDialogRef = this.dialog.open(LibraryAddDialog, {
       data: {
         gameId: gameid,
         needsCloseWarning: true,
       },
       disableClose: true,
     });
-    dialogRef.backdropClick().subscribe(() => this.spawnQuitWarning());
-    dialogRef.keydownEvents().pipe(
+    this.libaddDialogRef.backdropClick().subscribe(() => this.spawnQuitWarning(gameid));
+    this.libaddDialogRef.keydownEvents().pipe(
       filter(e => e.key === 'Escape')
-    ).subscribe(() => this.spawnQuitWarning());
-    dialogRef.afterClosed().subscribe(result => {
+    ).subscribe(() => this.spawnQuitWarning(gameid));
+    this.libaddDialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log("result: ", result);
         this.dialogRef.close(true);
@@ -70,15 +72,22 @@ export class NewLibraryListEntryDialog {
     });
   }
 
-  spawnQuitWarning() {
+  spawnQuitWarning(gameid: string) {
     const dialogRef = this.dialog.open(LibraryAddDialogQuitWarning);
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
         if (result === "delete") {
           console.log("delete the game");
+          this.libaddDialogRef!.close();
+          this.gameService.removeFromCatalog(gameid).subscribe({
+            next: () => console.log("game deleted"),
+            error: (err) => console.error(err),
+          });
         } else if (result === "keep") {
           console.log("stop the library addition but keep the game in the catalog");
+          this.libaddDialogRef!.close();
         } else {
+          // looks like it won't hit.
           console.log("will this logic branch hit?");
         }
       } else {

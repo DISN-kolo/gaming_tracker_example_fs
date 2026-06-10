@@ -3,7 +3,6 @@ import {
   MatDialog,
   MatDialogRef,
   MatDialogTitle,
-  MatDialogContent,
   MatDialogActions,
   MatDialogClose,
 } from '@angular/material/dialog';
@@ -13,7 +12,6 @@ import { MatButton } from '@angular/material/button';
   selector: 'app-library-add-dialog-quit-warning',
   imports: [
     MatDialogTitle,
-    MatDialogContent,
     MatDialogActions,
     MatDialogClose,
     MatButton,
