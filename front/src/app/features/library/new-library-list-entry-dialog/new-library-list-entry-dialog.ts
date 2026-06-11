@@ -60,6 +60,9 @@ export class NewLibraryListEntryDialog {
       },
       disableClose: true,
     });
+    this.libaddDialogRef.componentInstance.cancelWarningRequested.subscribe(
+      () => this.spawnQuitWarning(gameid)
+    );
     this.libaddDialogRef.backdropClick().subscribe(() => this.spawnQuitWarning(gameid));
     this.libaddDialogRef.keydownEvents().pipe(
       filter(e => e.key === 'Escape')

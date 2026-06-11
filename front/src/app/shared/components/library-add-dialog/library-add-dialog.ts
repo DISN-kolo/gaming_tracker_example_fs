@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
@@ -40,6 +40,7 @@ export class LibraryAddDialog {
   private dialogRef = inject(MatDialogRef<LibraryAddDialog>);
   private gameService = inject(GameService);
   public dialogData: {gameId: string, needsCloseWarning: boolean} = inject(MAT_DIALOG_DATA);
+  cancelWarningRequested = output<void>();
 
   statuses = COMPLETION_STATUSES;
   protected readonly preventNonInteger = preventNonInteger;
@@ -48,6 +49,14 @@ export class LibraryAddDialog {
     status: [null as CompletionStatus | null, [Validators.required, statusInList(COMPLETION_STATUSES)]],
     rating: [null as number | null, [Validators.min(1), Validators.max(10)]],
   });
+
+  cancel() {
+    if (this.dialogData.needsCloseWarning) {
+      this.cancelWarningRequested.emit();
+    } else {
+      this.dialogRef.close();
+    }
+  }
 
   submit() {
     if (this.form.invalid) {
