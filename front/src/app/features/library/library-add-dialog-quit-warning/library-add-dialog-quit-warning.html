@@ -1,7 +1,7 @@
 <h2 mat-dialog-title class="dialog-title">Are you sure you want to stop adding the game?</h2>
 
 <mat-dialog-actions align="end">
-	<button mat-flat-button (click)="yesAndDeleteGame()">Yes, and delete the game</button>
-	<button mat-flat-button (click)="yesAndKeepGame()">Yes, but keep the game</button>
+	<button mat-flat-button class="very-red" (click)="yesAndDeleteGame()">Yes, and delete the game</button>
+	<button mat-flat-button class="mildly-red" (click)="yesAndKeepGame()">Yes, but keep the game</button>
 	<button mat-button mat-dialog-close>No, continue</button>
 </mat-dialog-actions>

@@ -1,0 +1,17 @@
+.very-red {
+	background-color: #e62828 !important;
+	color: #e0e0e0 !important;
+}
+
+.very-red:hover {
+	background-color: #e53935 !important;
+}
+
+.mildly-red {
+	background-color: #e65628 !important;
+	color: #d0d0d0 !important;
+}
+
+.mildly-red:hover {
+	background-color: #e66638 !important;
+}
