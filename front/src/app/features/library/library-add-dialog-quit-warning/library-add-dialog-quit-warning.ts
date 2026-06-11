@@ -7,6 +7,7 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-library-add-dialog-quit-warning',
@@ -15,6 +16,7 @@ import { MatButton } from '@angular/material/button';
     MatDialogActions,
     MatDialogClose,
     MatButton,
+    A11yModule,
   ],
   templateUrl: './library-add-dialog-quit-warning.html',
   styleUrl: './library-add-dialog-quit-warning.css',
