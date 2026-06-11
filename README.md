@@ -1,7 +1,7 @@
 # gaming\_tracker\_example\_fs
 A fullstack project to learn Angular and .NET Core
 
-## used to set the project up:
+## used to set the project up (as a reference for future blank projects):
 
 ### for the back:
 - `cd back`
@@ -31,7 +31,3 @@ A fullstack project to learn Angular and .NET Core
 
 - launch the docker: `docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build back db`
 - connect for testing: `openssl s_client -connect localhost:8443`
-
-## misc notes and such:
-
-- please manage the colors, sizes and spacings of form-related suff. Also, maybe not get the description past the kebab menu?
