@@ -1,11 +1,14 @@
-<p>Library list (placeholder)</p>
+<div class="user-greeting">
 @if (userinfo() === undefined) {
 	<p>Hello, user...<p>
 } @else if (userinfo()!.hasOwnProperty('username')) {
-	<p>Hello, {{ userinfo()!.username }}</p>
+	<p>Hello, {{ userinfo()!.username }}, and welcome to your library.</p>
 } @else {
+	<div class="fail-load">
 	<p>Failed to load user</p>
+	</div>
 }
+</div>
 <ul class="library-list">
 	<li><app-new-library-list-entry (libraryEntryAdded)="refreshLibrary()" /></li>
 	@if (libraryEntries() === undefined) {

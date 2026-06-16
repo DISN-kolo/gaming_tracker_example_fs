@@ -19,3 +19,13 @@
 .games-list li {
 	list-style: none;
 }
+
+.user-greeting {
+	font-size: 2rem;
+	margin: 2.5rem 10% 0;
+	line-height: 2.2rem;
+}
+
+.fail-load {
+	color: darkred;
+}
